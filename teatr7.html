@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Театральне мистецтво · Ліцей «Ясно»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#0644FF;--lb:#517BFF;--y:#FFCD01;--ink:#0B1640;--bg:#F5F6FA;--card:#fff;--mute:#5b6488;--line:#dfe4f3;--ok:#16a34a;--bad:#dc2626}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3,h4,.mont{font-family:Montserrat,Manrope,sans-serif}
+button{font:inherit;cursor:pointer}
+.app{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh}
+.side{background:#fff;border-right:1px solid var(--line);padding:16px;position:sticky;top:0;height:100vh;overflow:auto}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:12px;text-decoration:none;color:var(--ink)}
+.logo .mk{width:42px;height:42px;border-radius:12px;background:var(--blue);color:var(--y);display:grid;place-items:center;font:800 20px Montserrat}
+.logo b{font:800 15px Montserrat;display:block}.logo small{color:var(--mute);font-size:12px}
+.sbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:10px 0}
+.sbtns button{border:0;border-radius:10px;padding:8px 4px;background:var(--bg);font-weight:700;font-size:12.5px;color:var(--ink)}
+.sbtns button:hover{background:var(--y)}
+.search{width:100%;padding:9px 12px;border:2px solid var(--line);border-radius:10px;font:inherit}
+.mod{margin-top:12px}
+.mod h4{margin:0 0 4px;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;display:flex;gap:6px;align-items:center}
+.mod h4 i{width:10px;height:10px;border-radius:50%;flex:none}
+.mod a{display:block;padding:6px 8px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px}
+.mod a:hover{background:var(--bg)}.mod a.on{background:var(--blue);color:#fff}
+.mod a span{color:var(--mute);font-size:12px;margin-right:4px}.mod a.on span{color:var(--y)}
+.main{padding:22px 28px 60px;max-width:1150px;width:100%}
+.burger{display:none}
+.hero{background:var(--blue);color:#fff;border-radius:22px;padding:30px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-50px;top:-50px;width:220px;height:220px;border-radius:50%;background:var(--y);opacity:.9}
+.hero h1{margin:0 0 8px;font-size:30px;max-width:75%}.hero p{margin:0;max-width:70%;opacity:.92}
+.mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:18px}
+.mcard{background:#fff;border-radius:16px;padding:16px;border-top:6px solid var(--lb);cursor:pointer;box-shadow:0 2px 10px #0b164010}
+.mcard:hover{transform:translateY(-2px)}
+.mcard b{font-family:Montserrat;display:block;margin-bottom:4px}.mcard small{color:var(--mute)}
+.lhead{margin-bottom:12px}.lhead .crumb{color:var(--mute);font-size:13px;font-weight:700}
+.lhead h1{margin:4px 0 10px;font-size:26px}
+.modes{display:flex;gap:6px;flex-wrap:wrap}
+.modes button{border:2px solid var(--lb);background:#fff;color:var(--blue);border-radius:999px;padding:6px 14px;font-weight:700}
+.modes button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.tabs{display:flex;gap:6px;overflow:auto;margin:14px 0 10px;padding-bottom:4px}
+.tabs button{border:0;background:#fff;border-radius:12px;padding:8px 12px;font-weight:700;font-size:13.5px;white-space:nowrap;color:var(--ink);box-shadow:0 1px 4px #0b164012}
+.tabs button.on{background:var(--y)}
+.tabs button.done{color:var(--mute)}
+.mins{font-weight:800;color:var(--blue);font-size:14px;margin:10px 0 4px}
+.ribbon{display:inline-block;background:var(--lb);color:#fff;font:800 20px Montserrat;padding:8px 22px;transform:skew(-10deg);border-radius:6px;margin:0 0 16px}
+.ribbon span{display:inline-block;transform:skew(10deg)}
+.nav2{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+.btn{border:0;border-radius:12px;padding:10px 16px;font-weight:700;background:var(--blue);color:#fff}
+.btn.y{background:var(--y);color:var(--ink)}.btn.g{background:#fff;color:var(--blue);border:2px solid var(--lb)}
+.btn:disabled{opacity:.4}
+.card{background:#fff;border-radius:16px;padding:18px 20px;margin:12px 0;box-shadow:0 2px 10px #0b164010}
+.act{background:#fff;border:2px solid var(--lb);border-radius:16px;margin:16px 0;overflow:hidden}
+.act>.bar{background:var(--y);padding:8px 14px;display:flex;align-items:center;gap:6px;font:800 15px Montserrat}
+.act>.bar i{width:9px;height:9px;border-radius:50%;background:#fff;display:inline-block}
+.act>.bar span{margin-left:8px}
+.act>.body{padding:14px 16px}
+.def{background:#eaf0ff;border-left:6px solid var(--blue);border-radius:12px;padding:14px 16px;margin:12px 0;font-size:17px}
+.def b,.rule b,.theory b{color:var(--blue)}
+.rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin:12px 0}
+.rule{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 14px}
+.rule h4{margin:0 0 4px;font-size:15px}
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;background:#fff;border-radius:12px;overflow:hidden}
+.tbl th{background:var(--blue);color:#fff;text-align:left;padding:8px 10px;font-size:14px}
+.tbl td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+.ex{background:#fffbea;border-left:5px solid var(--y);border-radius:10px;padding:10px 14px;margin:10px 0;font-style:italic}
+.ex small{display:block;font-style:normal;color:var(--mute);margin-top:4px}
+.note{background:#eef8f1;border-left:5px solid var(--ok);border-radius:10px;padding:10px 14px;margin:10px 0}
+.warn{background:#fff1f1;border-left:5px solid var(--bad);border-radius:10px;padding:10px 14px;margin:10px 0}
+.timeline{border-left:4px solid var(--lb);margin:12px 0 12px 8px;padding-left:16px}
+.timeline div{position:relative;margin:8px 0}
+.timeline div:before{content:"";position:absolute;left:-24px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--y);border:2px solid var(--blue)}
+.timeline b{color:var(--blue)}
+.scheme{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}
+.scheme span{background:#eaf0ff;border:2px solid var(--lb);border-radius:12px;padding:8px 12px;font-weight:700}
+.scheme em{font-style:normal;font-weight:800;color:var(--blue)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.flip{perspective:800px;height:130px;cursor:pointer}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.f .in{transform:rotateY(180deg)}
+.flip .a,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:grid;place-items:center;padding:10px;text-align:center}
+.flip .a{background:var(--blue);color:#fff;font:700 16px Montserrat}
+.flip .b{background:#fff;border:2px solid var(--lb);transform:rotateY(180deg);font-size:14px}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;margin:6px 0;color:var(--ink)}
+.opt:hover{border-color:var(--lb)}
+.opt.ok{background:#e8f8ee;border-color:var(--ok)}.opt.no{background:#fdecec;border-color:var(--bad)}
+.q{margin:12px 0}.q>b{display:block;margin-bottom:4px}
+.expl{display:none;font-size:14px;color:var(--mute);margin-top:4px}.q.ans .expl{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.chip{border:2px solid var(--lb);background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;color:var(--ink)}
+.chip.sel{background:var(--y);border-color:var(--y)}
+.chip.ok{background:#e8f8ee;border-color:var(--ok)}.chip.no{background:#fdecec;border-color:var(--bad)}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.bucket{border:2px dashed var(--lb);border-radius:14px;padding:10px;min-height:90px;cursor:pointer;background:#f8faff}
+.bucket h5{margin:0 0 6px;font:800 14px Montserrat;color:var(--blue)}
+.mcols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mi{display:block;width:100%;border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px;margin:6px 0;text-align:left;color:var(--ink)}
+.mi.sel{border-color:var(--y);background:#fff8d6}.mi.ok{border-color:var(--ok);background:#e8f8ee;opacity:.7}.mi.no{border-color:var(--bad);background:#fdecec}
+.ord li{display:flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 10px;margin:6px 0}
+.ord li span{flex:1}.ord li button{border:0;background:var(--bg);border-radius:8px;width:32px;height:30px}
+.ord li.ok{border-color:var(--ok);background:#e8f8ee}.ord li.no{border-color:var(--bad);background:#fdecec}
+.tf{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tf p{flex:1;margin:0;min-width:200px}.tf button{border:2px solid var(--lb);background:#fff;border-radius:10px;padding:5px 10px;font-weight:700}
+.tf.ok p{color:var(--ok)}.tf.no p{color:var(--bad)}.tf small{flex-basis:100%;color:var(--mute);display:none}.tf.ans small{display:block}
+select.fl{font:inherit;border:2px solid var(--lb);border-radius:8px;padding:2px 4px;background:#fff;color:var(--ink)}
+select.fl.ok{border-color:var(--ok);background:#e8f8ee}select.fl.no{border-color:var(--bad);background:#fdecec}
+.cw{border-collapse:collapse;margin:8px auto}
+.cw td{width:34px;height:34px;padding:0;position:relative}
+.cw td.c{border:2px solid var(--ink);background:#fff}
+.cw td.c input{width:100%;height:100%;border:0;text-align:center;font:700 17px Montserrat;text-transform:uppercase;background:transparent;color:var(--ink);padding:0}
+.cw td.c sup{position:absolute;left:2px;top:0;font-size:9px;color:var(--blue);font-weight:800}
+.cw td.ok{background:#e8f8ee}.cw td.no{background:#fdecec}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14.5px}
+.clues ol{padding-left:0;list-style:none;margin:4px 0}.clues li b{color:var(--blue)}
+.mem{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.mem button{height:96px;border-radius:12px;border:0;background:var(--blue);color:var(--blue);font-weight:700;font-size:13.5px;padding:6px}
+.mem button.op{background:#fff;color:var(--ink);border:2px solid var(--lb)}
+.mem button.dn{background:#e8f8ee;color:var(--ok);border:2px solid var(--ok)}
+.mem button.dn.alt{background:#fff8d6;color:#8a6d00;border-color:var(--y)}
+.weather{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.wc{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 8px;text-align:center;cursor:pointer;user-select:none}
+.wc:hover{border-color:var(--lb)}
+.wc .e{font-size:44px}.wc b{display:block;font-family:Montserrat;margin:4px 0}.wc .n{font:800 24px Montserrat;color:var(--blue)}
+.cmp{margin-top:14px}.cmp .row{display:flex;align-items:center;gap:8px;margin:4px 0}
+.cmp .row span{width:110px;font-size:14px}.cmp .bar2{height:14px;border-radius:7px;background:var(--lb)}.cmp .bar2.a{background:var(--y)}
+.topic{background:var(--blue);color:#fff;border-radius:20px;padding:24px}
+.topic h2{margin:0 0 10px;font-size:26px}.topic ul{margin:6px 0 0}
+.plan{display:flex;gap:4px;margin-top:16px;flex-wrap:wrap}
+.plan div{flex:1;min-width:90px;background:#ffffff22;border-radius:8px;padding:6px;font-size:12px;text-align:center}
+.plan div b{display:block;color:var(--y);font-size:14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:10px 0}
+.tile{border:0;border-radius:16px;background:#fff;border:2px solid var(--lb);padding:14px 8px;font-weight:800;font-family:Montserrat;color:var(--ink)}
+.tile .e{font-size:30px;display:block}.tile.on{background:var(--y);border-color:var(--y)}
+.gamebox{margin-top:10px}
+.p15{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-width:480px;margin:10px auto}
+.p15 button{position:relative;min-height:90px;border:0;border-radius:12px;background:var(--blue);color:#fff;font-weight:700;padding:8px;font-size:14px}
+.p15 button sup{position:absolute;left:6px;top:4px;color:var(--y);font-size:12px}
+.p15 button.e{background:transparent;border:2px dashed var(--line)}
+.big{font:800 64px Montserrat;color:var(--blue);text-align:center}
+.timer{font:800 32px Montserrat;color:var(--blue)}
+.qbtn{display:inline-block;border:0;background:var(--y);color:var(--ink);border-radius:8px;padding:0 10px;font-weight:800;margin:0 2px}
+.qbtn.r{background:#eaf0ff;color:var(--blue)}
+.letters{display:flex;gap:6px;justify-content:center;margin:12px 0}
+.letters span{width:42px;height:48px;border-radius:10px;background:#eaf0ff;display:grid;place-items:center;font:800 24px Montserrat;color:var(--blue);border:2px solid var(--lb)}
+.inp{font:inherit;border:2px solid var(--lb);border-radius:10px;padding:8px 10px;width:100%;max-width:340px}
+.score{position:fixed;right:16px;bottom:16px;background:#fff;border:2px solid var(--lb);border-radius:16px;padding:10px;z-index:50;box-shadow:0 6px 24px #0b164030;min-width:230px}
+.score .tm{display:flex;align-items:center;gap:6px;margin:4px 0}
+.score .tm input{width:90px;border:1px solid var(--line);border-radius:6px;padding:3px 6px;font:inherit;font-size:13px}
+.score .tm b{font:800 22px Montserrat;color:var(--blue);min-width:34px;text-align:center}
+.score .tm button{border:0;background:var(--bg);border-radius:8px;width:30px;height:30px;font-weight:800}
+.toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;z-index:99}
+.refl textarea,.refl input{width:100%;font:inherit;border:2px solid var(--line);border-radius:10px;padding:8px}
+.light{display:flex;gap:10px;flex-wrap:wrap}.light button{flex:1;min-width:150px;border:0;border-radius:14px;padding:14px;font-weight:800;color:#fff;font-size:16px}
+.steps{display:flex;flex-direction:column-reverse;gap:6px;max-width:520px}
+.steps button{border:0;border-radius:10px;padding:10px;font-weight:700;text-align:left;background:#eaf0ff;color:var(--ink)}
+.steps button b{float:right;color:var(--blue)}
+html.present{font-size:125%}
+html.present .side,html.present .burger{display:none!important}
+html.present .app{grid-template-columns:minmax(0,1fr)}
+html.present .main{max-width:none}
+@media(max-width:860px){.app{grid-template-columns:minmax(0,1fr)}.side{position:fixed;left:-320px;width:300px;z-index:60;transition:left .2s}.side.open{left:0}
+.burger{display:inline-block;position:fixed;left:10px;top:10px;z-index:61;border:0;background:var(--blue);color:#fff;border-radius:10px;width:42px;height:42px;font-size:20px}
+.main{padding:62px 14px 60px}.weather{grid-template-columns:repeat(3,1fr)}.hero h1,.hero p{max-width:100%}.clues,.mcols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<button class="burger" onclick="document.querySelector('.side').classList.toggle('open')">☰</button>
+<div class="app">
+<aside class="side">
+ <a class="logo" href="#"><div class="mk">Я</div><div><b>Театральне мистецтво</b><small>Ліцей «Ясно»</small></div></a>
+ <div class="sbtns"><button onclick="location.hash='#games'">🎲 Ігри</button><button onclick="toggleScore()">🏆 Табло</button><button onclick="present()">🖥️ Презентація</button></div>
+ <input class="search" placeholder="Пошук уроку…" oninput="sideNav(this.value)">
+ <nav id="nav"></nav>
+</aside>
+<main class="main" id="main"></main>
+</div>
+<div id="scoreBox"></div>
+<script>
+const LS={};function L(n,title,theory,acts){LS[n]={n,title,theory,acts:acts||[]}}
+function ex(t,a){return `<div class="ex">${t}${a?`<small>— ${a}</small>`:''}</div>`}
+const MORE={},GOALS={},SUMRULE={},LWORDS={};
+const COURSE={title:'Театральне мистецтво: від античності до Кабукі',sub:'Інтерактивний курс за календарним планом: 9 модулів, 35 уроків. Кожен урок — 30 хвилин: настрій, розминка, нові знання, практика, ігри та рефлексія.'};
+const MODULES=[
+{n:1,title:'Сучасний театр світу',color:'#0644FF',range:[1,2]},
+{n:2,title:'Античний театр',color:'#B45309',range:[3,6]},
+{n:3,title:'Театр епохи Відродження',color:'#15803D',range:[7,10]},
+{n:4,title:'Український вертеп',color:'#B91C1C',range:[11,15]},
+{n:5,title:'Театр класицизму',color:'#7C3AED',range:[16,19]},
+{n:6,title:'Театр сентименталізму',color:'#DB2777',range:[20,23]},
+{n:7,title:'Театр романтизму',color:'#0E7490',range:[24,27]},
+{n:8,title:'Театр і суспільство',color:'#475569',range:[28,31]},
+{n:9,title:'Японський театр Кабукі',color:'#C2410C',range:[32,35]}];
+
+/* ===== Модуль 1 ===== */
+L(1,'Сучасне театральне мистецтво різних країн',
+`<div class="def"><b>Театр</b> — вид мистецтва, у якому <b>актори</b> перед <b>глядачами</b> «тут і зараз» створюють художній образ. Кожна країна має свої <b>театральні традиції</b>, а сучасний театр поєднує їх із новими формами.</div>
+<table class="tbl"><tr><th>Країна</th><th>Що варто знати</th></tr>
+<tr><td>🇺🇦 Україна</td><td>Національний театр ім. Івана Франка (Київ), Львівський театр ім. Марії Заньковецької; новаторська спадщина Леся Курбаса і театру «Березіль» (1922); сучасні документальні вистави та фестиваль «ГогольFest».</td></tr>
+<tr><td>🇵🇱 Польща</td><td>Єжи Гротовський і ідея «бідного театру»: головне — актор і глядач, без пишних декорацій.</td></tr>
+<tr><td>🇫🇷 Франція</td><td>«Комеді Франсез» (заснований 1680 р.) — один із найстаріших діючих театрів; Авіньйонський фестиваль (з 1947 р.).</td></tr>
+<tr><td>🇺🇸 США</td><td>Бродвей у Нью-Йорку — столиця <b>мюзиклу</b>, де поєднуються драма, спів і танець.</td></tr>
+<tr><td>🇯🇵 Японія</td><td>Традиційні театри Но, Кабукі та ляльковий Бунраку живуть поруч із сучасною сценою.</td></tr>
+<tr><td>🇨🇳 Китай</td><td>Пекінська опера: спів, акробатика, бойові мистецтва, яскравий символічний грим.</td></tr></table>
+<div class="rules"><div class="rule"><h4>🎭 Драматичний театр</h4>Головне — слово і гра актора.</div><div class="rule"><h4>🎶 Музичний театр</h4>Опера, балет, оперета, мюзикл.</div><div class="rule"><h4>🪆 Театр ляльок</h4>Актори-ляльководи оживлюють ляльок.</div><div class="rule"><h4>🧑‍🎤 Сучасні форми</h4>Документальний, імерсивний (глядач усередині дії), вуличний театр.</div></div>
+<div class="note">Театр — <b>синтетичне мистецтво</b>: у ньому поєднуються література, музика, живопис, танець, архітектура.</div>`,
+[{type:'match',title:'Країна — театральна традиція',pairs:[['Україна','«Березіль» Леся Курбаса'],['Польща','«Бідний театр» Гротовського'],['Франція','«Комеді Франсез»'],['США','Мюзикли Бродвею'],['Китай','Пекінська опера'],['Японія','Кабукі та Бунраку']]},
+{type:'sort',title:'Який це вид театру?',buckets:['Драматичний','Музичний','Ляльковий'],items:[['Вистава за п’єсою Шекспіра',0],['Опера',1],['Балет',1],['Мюзикл',1],['Бунраку',2],['Вертеп',2],['Комедія Мольєра',0]]},
+{type:'quiz',qs:[{q:'Чому театр називають синтетичним мистецтвом?',o:['Бо поєднує різні види мистецтва','Бо використовує синтетичні тканини','Бо в ньому немає музики'],a:0,e:'Слово, музика, живопис, танець і архітектура працюють разом.'},{q:'Що таке імерсивний театр?',o:['Глядач стає учасником дії','Театр без акторів','Театр лише для дітей'],a:0,e:'Від англ. immersive — «занурювальний».'}]}]);
+MORE[1]=[['Де розташований Бродвей?',['У Нью-Йорку','У Лондоні','У Парижі'],'Бродвей — театральний район Нью-Йорка.'],['Хто створив театр «Березіль»?',['Лесь Курбас','Іван Франко','Тарас Шевченко'],'Лесь Курбас — режисер-новатор українського театру.'],['Що таке мюзикл?',['Вистава, де поєднуються драма, спів і танець','Опера без музики','Ляльковий театр'],'Мюзикл — популярний жанр музичного театру.'],['Яка ідея «бідного театру» Гротовського?',['Головне — актор і глядач','Найдорожчі декорації','Театр без глядачів'],'Гротовський прибирав усе зайве зі сцени.'],['Пекінська опера — це театр якої країни?',['Китаю','Японії','Кореї'],'Пекінська опера поєднує спів, акробатику й грим.'],['Коли засновано «Комеді Франсез»?',['У 1680 році','У 1980 році','У 1480 році'],'Це один із найстаріших діючих театрів світу.'],['Що є обов’язковим для будь-якої вистави?',['Актор і глядач','Завіса','Оркестр'],'Без актора й глядача театру немає.'],['Як називається японський театр ляльок?',['Бунраку','Кабукі','Но'],'Бунраку — традиційний ляльковий театр Японії.']];
+GOALS[1]=['пояснювати, чому театр — синтетичне мистецтво','називати театральні традиції різних країн','розрізняти драматичний, музичний і ляльковий театр'];
+LWORDS[1]=[['МЮЗИКЛ','Вистава, де поєднуються драма, спів і танець'],['БРОДВЕЙ','Театральний район Нью-Йорка'],['АКТОР','Той, хто грає роль на сцені'],['ГЛЯДАЧ','Той, хто дивиться виставу'],['ОПЕРА','Музична вистава, де герої співають'],['БАЛЕТ','Вистава, де зміст передають танцем'],['БЕРЕЗІЛЬ','Театр Леся Курбаса']];
+
+L(2,'Видатні театри Європи, зокрема України',
+`<div class="def">Великі театри Європи — це не лише сцени, а й <b>архітектурні пам’ятки</b>. Їхні будівлі стали <b>символами міст</b>, а вистави — частиною <b>світової культури</b>.</div>
+<div class="timeline"><div><b>1778</b> — відкрито оперний театр <b>Ла Скала</b> в Мілані.</div><div><b>1869</b> — відкрито Віденську державну оперу.</div><div><b>1875</b> — у Парижі відкрито <b>Палац Гарньє</b> (Гранд-Опера).</div><div><b>1887</b> — відкрито Одеський театр опери та балету.</div><div><b>1900</b> — відкрито Львівський оперний театр.</div><div><b>1901</b> — збудовано будівлю Київської опери (нині Національна опера України).</div><div><b>1997</b> — у Лондоні відтворено шекспірівський театр «Глобус».</div></div>
+<div class="rules"><div class="rule"><h4>🇺🇦 Одеський оперний</h4>Архітектори Фельнер і Гельмер; один із найкрасивіших театрів Європи.</div><div class="rule"><h4>🇺🇦 Львівська опера</h4>Архітектор Зигмунт Горголевський; фасад прикрашають скульптури Слави, Поезії, Музики.</div><div class="rule"><h4>🇺🇦 Театр ім. І. Франка</h4>Провідний драматичний театр Києва.</div><div class="rule"><h4>🇬🇧 Національний театр</h4>Королівський національний театр у Лондоні.</div></div>
+<div class="note">Театральна будівля має <b>глядацьку залу</b> (партер, амфітеатр, ложі, балкон, яруси), <b>сцену</b> і <b>закуліся</b>.</div>`,
+[{type:'order',title:'Розташуйте відкриття театрів у хронологічному порядку',items:['Ла Скала (Мілан)','Віденська опера','Палац Гарньє (Париж)','Одеський оперний театр','Львівський оперний театр','Київська опера (будівля)']},
+{type:'flip',title:'Частини глядацької зали',cards:[['Партер','Місця на рівні сцени, ближче до неї'],['Амфітеатр','Місця, що піднімаються за партером'],['Ложа','Окреме відгороджене місце для кількох глядачів'],['Балкон','Верхній ярус залу'],['Закуліся','Простір за сценою, невидимий глядачам'],['Яруси','Поверхи лож і балконів у залі']]},
+{type:'tf',items:[['Ла Скала розташована в Мілані.',true,'Так, це знаменитий оперний театр Італії.'],['Львівську оперу відкрито у 2000 році.',false,'У 1900 році.'],['Палац Гарньє — оперний театр Парижа.',true,'Його ще називають Гранд-Опера.'],['Одеський оперний театр відкрито в 1887 році.',true,'Так, будівля — шедевр архітектури.']]}]);
+MORE[2]=[['У якому місті розташований театр Ла Скала?',['У Мілані','У Римі','У Венеції'],'Ла Скала відкрито в 1778 році.'],['Як інакше називають Палац Гарньє?',['Гранд-Опера','Ла Скала','Глобус'],'Це оперний театр Парижа.'],['Коли відкрито Львівський оперний театр?',['У 1900 році','У 1800 році','У 1950 році'],'Архітектор — Зигмунт Горголевський.'],['Де розташований театр, збудований архітекторами Фельнером і Гельмером у 1887 р.?',['В Одесі','У Харкові','У Дніпрі'],'Одеський театр опери та балету.'],['Що таке партер?',['Місця на рівні сцени','Верхній ярус','Простір за сценою'],'Партер — місця в нижній частині залу.'],['Що таке ложа?',['Відгороджене місце для кількох глядачів','Завіса','Гримерна'],'Ложі розташовані ярусами.'],['Який театр відтворили в Лондоні в 1997 році?',['«Глобус»','Ла Скала','Комеді Франсез'],'Це реконструкція шекспірівського театру.'],['Як називається простір за сценою?',['Закуліся','Партер','Амфітеатр'],'Там готуються актори й зберігаються декорації.']];
+GOALS[2]=['називати видатні театри Європи та України','пояснювати будову глядацької зали','розташовувати події в хронологічному порядку'];
+LWORDS[2]=[['ПАРТЕР','Місця на рівні сцени'],['ЛОЖА','Відгороджене місце в залі'],['БАЛКОН','Верхній ярус залу'],['ОДЕСА','Місто з оперним театром 1887 року'],['МІЛАН','Місто, де розташована Ла Скала'],['ЗАКУЛІСЯ','Простір за сценою'],['ЯРУС','Поверх лож і балконів']];
+
+/* ===== Модуль 2 ===== */
+L(3,'Уявлення про античний театр як різновид мистецтва в Давній Греції та Римі',
+`<div class="def">Античний театр народився в <b>Давній Греції</b> зі свят на честь бога вина й родючості <b>Діоніса</b>. Головні жанри — <b>трагедія</b> і <b>комедія</b>. Римляни перейняли грецький театр і додали видовищності.</div>
+<div class="scheme"><span>Свята Діоніса (Діонісії)</span><em>→</em><span>Хор співає дифірамби</span><em>→</em><span>З хору виділяється актор</span><em>→</em><span>Трагедія і комедія</span></div>
+<table class="tbl"><tr><th></th><th>Давня Греція</th><th>Давній Рим</th></tr>
+<tr><td>Значення</td><td>Релігійне свято, обов’язок громадянина</td><td>Розвага, видовище</td></tr>
+<tr><td>Жанри</td><td>Трагедія, комедія, сатирова драма</td><td>Комедія, пантоміма, мім</td></tr>
+<tr><td>Актори</td><td>Вільні громадяни, шановані</td><td>Часто раби або вільновідпущеники</td></tr>
+<tr><td>Автори</td><td>Есхіл, Софокл, Евріпід, Аристофан</td><td>Плавт, Теренцій</td></tr></table>
+<div class="rules"><div class="rule"><h4>😢 Трагедія</h4>Від грец. «пісня козлів» — про долю, страждання героя, вибір між обов’язком і бажанням.</div><div class="rule"><h4>😄 Комедія</h4>Від грец. «пісня веселої процесії» — висміює вади людей і суспільства.</div></div>
+${ex('Театральні маски — сумна й весела — і сьогодні є символом театру.')}`,
+[{type:'flip',title:'Античні поняття',cards:[['Діоніс','Бог вина й родючості, на честь якого влаштовували вистави'],['Трагедія','Жанр про страждання героя та його долю'],['Комедія','Жанр, що висміює людські вади'],['Хор','Група співаків, що коментувала події'],['Маска','Обличчя персонажа, яке бачили глядачі'],['Діонісії','Свята, під час яких проводили театральні змагання']]},
+{type:'sort',title:'Греція чи Рим?',buckets:['Давня Греція','Давній Рим'],items:[['Есхіл',0],['Плавт',1],['Свята Діоніса',0],['Пантоміма як популярна розвага',1],['Теренцій',1],['Софокл',0]]},
+{type:'quiz',qs:[{q:'На честь якого бога влаштовували вистави в Греції?',o:['Діоніса','Зевса','Аполлона'],a:0,e:'Театр виріс зі свят Діоніса.'},{q:'Хто часто був актором у Давньому Римі?',o:['Раби та вільновідпущеники','Лише сенатори','Жрці'],a:0,e:'У Римі актори мали низький суспільний статус.'}]}]);
+MORE[3]=[['Що означає слово «трагедія»?',['«Пісня козлів»','«Весела процесія»','«Місце для видовищ»'],'Учасники свят Діоніса одягали козячі шкури.'],['Що висміює комедія?',['Людські вади','Богів-олімпійців','Природу'],'Комедія показує смішне в житті.'],['Яку функцію виконував хор?',['Коментував події і співав','Будував сцену','Продавав квитки'],'Хор — важливий учасник античної вистави.'],['Що символізують дві маски?',['Трагедію і комедію','День і ніч','Літо і зиму'],'Сумна й весела маски — символ театру.'],['Хто з авторів — римлянин?',['Плавт','Софокл','Есхіл'],'Плавт писав комедії в Римі.'],['Як ставилися до театру в Греції?',['Як до свята й обов’язку громадянина','Як до заборони','Як до забави рабів'],'Державa навіть оплачувала квитки бідним.'],['Який жанр був третім у грецькому театрі?',['Сатирова драма','Опера','Мюзикл'],'Сатирова драма — жартівлива вистава з хором сатирів.'],['Як називалися свята Діоніса?',['Діонісії','Олімпіади','Сатурналії'],'Під час Діонісій проводили театральні змагання.']];
+GOALS[3]=['пояснювати, як виник античний театр','розрізняти трагедію і комедію','порівнювати театр Греції та Риму'];
+LWORDS[3]=[['ДІОНІС','Бог, на честь якого влаштовували вистави'],['ТРАГЕДІЯ','Жанр про страждання героя'],['КОМЕДІЯ','Жанр, що висміює вади'],['ХОР','Група співаків в античній виставі'],['МАСКА','Обличчя персонажа'],['ГРЕЦІЯ','Батьківщина театру'],['ПЛАВТ','Римський комедіограф']];
+
+L(4,'Структура давньогрецького театру: театрон, орхестра та скене',
+`<div class="def">Давньогрецький театр мав три головні частини: <b>театрон</b> — місця для глядачів на схилі пагорба, <b>орхестра</b> — кругла площадка для хору й акторів, <b>скене</b> — будівля за орхестрою, з якої виходили актори.</div>
+<div class="rules"><div class="rule"><h4>🏟️ Театрон</h4>«Місце для видовищ» — кам’яні лави півколом на схилі пагорба; вміщав до 15–17 тисяч глядачів.</div><div class="rule"><h4>⭕ Орхестра</h4>Кругла площадка, де танцював і співав хор; у центрі — вівтар Діоніса.</div><div class="rule"><h4>🏛️ Скене</h4>Будівля для переодягання акторів; її стіна була тлом вистави.</div><div class="rule"><h4>➖ Проскеніон</h4>Помост перед скене — місце гри акторів.</div></div>
+<div class="note">Завдяки чудовій <b>акустиці</b> в театрі Епідавра шепіт зі сцени чути навіть у найвищих рядах.</div>
+<div class="rules"><div class="rule"><h4>⚙️ Машина</h4>Кран, що «спускав» бога з неба — звідси вислів <b>«бог із машини»</b>.</div><div class="rule"><h4>🛞 Еккіклема</h4>Платформа на колесах, яка «виїжджала» зі скене, щоб показати, що сталося всередині.</div></div>`,
+[{type:'match',title:'Частина театру — призначення',pairs:[['Театрон','Місця для глядачів'],['Орхестра','Кругла площадка для хору'],['Скене','Будівля для переодягання акторів'],['Проскеніон','Помост перед скене'],['Еккіклема','Платформа на колесах'],['Машина','Кран для появи богів']]},
+{type:'fill',items:['Глядачі сиділи в {театроні|орхестрі|скене} на схилі пагорба.','Хор співав і танцював на круглій {орхестрі|скене|театроні}.','Актори переодягалися в {скене|театроні|орхестрі}.','Вислів «бог із {машини|скене|хору}» означає несподівану розв’язку.']},
+{type:'tf',items:[['Театрон будували на схилі пагорба.',true,'Природний схил давав місця для тисяч глядачів.'],['Орхестра була квадратною.',false,'Орхестра — кругла площадка.'],['У театрі Епідавра чудова акустика.',true,'Навіть шепіт чути в останніх рядах.'],['Скене — це місця для глядачів.',false,'Скене — будівля за орхестрою.']]}]);
+MORE[4]=[['Що таке театрон?',['Місця для глядачів','Будівля для акторів','Площадка для хору'],'Театрон — «місце для видовищ».'],['Якої форми була орхестра?',['Круглої','Квадратної','Трикутної'],'Кругла площадка для хору.'],['Що стояло в центрі орхестри?',['Вівтар Діоніса','Трон царя','Статуя Зевса'],'Театр був пов’язаний із культом Діоніса.'],['Для чого слугувала скене?',['Для переодягання акторів і як тло','Для глядачів','Для оркестру'],'Стіна скене була декорацією.'],['Що означає вислів «бог із машини»?',['Несподівану розв’язку','Механічну іграшку','Падіння декорації'],'Бога спускали краном, і він вирішував усі проблеми.'],['Що таке еккіклема?',['Платформа на колесах','Маска','Взуття актора'],'Вона показувала події, що відбулися «всередині».'],['Скільки глядачів міг вмістити великий грецький театр?',['До 15–17 тисяч','До 100','До 500'],'Театр в Епідаврі вміщав близько 14–15 тисяч глядачів.'],['Чим славиться театр в Епідаврі?',['Акустикою','Дахом','Завісою'],'Шепіт зі сцени чути в найвищих рядах.']];
+GOALS[4]=['називати частини давньогрецького театру','пояснювати призначення театрону, орхестри та скене','пояснювати вислів «бог із машини»'];
+LWORDS[4]=[['ТЕАТРОН','Місця для глядачів'],['ОРХЕСТРА','Кругла площадка для хору'],['СКЕНЕ','Будівля за орхестрою'],['ЕПІДАВР','Місто з театром із чудовою акустикою'],['АКУСТИКА','Чутність звуку в театрі'],['ПОМОСТ','Підвищення для гри акторів'],['ВІВТАР','Стояв у центрі орхестри']];
+
+L(5,'Особливості акторської майстерності античного театру',
+`<div class="def">Античний актор був <b>універсалом</b>: один виконавець грав <b>кілька ролей</b>, змінюючи <b>маски</b>; він мав уміти <b>декламувати</b>, <b>співати</b> і <b>танцювати</b>. Усі ролі, навіть жіночі, грали <b>чоловіки</b>.</div>
+<div class="rules"><div class="rule"><h4>🎭 Маски</h4>Збільшували обличчя, щоб його бачили здалеку, і посилювали голос (як рупор).</div><div class="rule"><h4>👢 Котурни</h4>Взуття на високій підошві робило героїв трагедії вищими й величнішими.</div><div class="rule"><h4>👥 Кількість акторів</h4>Спочатку один; <b>Есхіл</b> увів другого, <b>Софокл</b> — третього. Троє акторів грали всі ролі.</div><div class="rule"><h4>🗣️ Голос і рух</h4>Обличчя сховане за маскою, тому важливі чітка вимова, жести, постава.</div></div>
+<div class="note">Перший відомий актор — <b>Теспід</b> (VI ст. до н. е.). Від його імені акторів досі жартома називають «теспідами».</div>`,
+[{type:'flip',title:'Інструменти античного актора',cards:[['Маска','Показувала персонажа і посилювала голос'],['Котурни','Високе взуття героїв трагедії'],['Хітон','Довгий одяг актора'],['Декламація','Виразне читання віршованого тексту'],['Жест','Рух, що передає почуття, коли обличчя сховане'],['Теспід','Перший відомий актор']]},
+{type:'order',title:'Як змінювалася кількість акторів',items:['Хор і заспівувач','Теспід — перший актор','Есхіл вводить другого актора','Софокл вводить третього актора']},
+{type:'quiz',qs:[{q:'Хто грав жіночі ролі в античному театрі?',o:['Чоловіки','Жінки','Діти'],a:0,e:'Жінки не виступали на сцені.'},{q:'Навіщо акторам котурни?',o:['Щоб виглядати вищими й величнішими','Щоб швидше бігати','Щоб не мерзнути'],a:0,e:'Котурни підкреслювали велич героїв трагедії.'}]}]);
+MORE[5]=[['Скільки ролей міг грати один античний актор?',['Кілька, змінюючи маски','Лише одну','Жодної'],'Троє акторів виконували всі ролі.'],['Що вміли античні актори?',['Декламувати, співати й танцювати','Лише мовчати','Лише співати'],'Актор був універсалом.'],['Хто ввів третього актора?',['Софокл','Есхіл','Аристофан'],'Есхіл увів другого, Софокл — третього.'],['Як звали першого відомого актора?',['Теспід','Плавт','Перікл'],'Теспід жив у VI ст. до н. е.'],['Для чого слугувала маска, крім образу?',['Посилювала голос','Захищала від дощу','Нічого більше'],'Маска діяла як рупор.'],['Що таке котурни?',['Взуття на високій підошві','Маски','Плащі'],'Котурни носили герої трагедій.'],['Чому були важливі жести?',['Обличчя ховалося за маскою','Актори не говорили','Глядачі були глухими'],'Почуття передавали рухом і голосом.'],['Хто увів другого актора?',['Есхіл','Софокл','Евріпід'],'Це дозволило будувати діалог.']];
+GOALS[5]=['пояснювати, як один актор грав кілька ролей','називати засоби виразності античного актора','пояснювати роль маски і котурнів'];
+LWORDS[5]=[['ТЕСПІД','Перший відомий актор'],['КОТУРНИ','Високе взуття героїв трагедії'],['МАСКА','Змінювала персонажа актора'],['ДЕКЛАМАЦІЯ','Виразне читання віршів'],['ЖЕСТ','Рух, що передає почуття'],['ХІТОН','Довгий одяг актора'],['ГОЛОС','Мав бути сильним і чітким']];
+
+L(6,'Есхіл, Софокл, Евріпід, Аристофан, Плавт як представники античного театру',
+`<div class="def">Три великі трагіки Греції — <b>Есхіл</b>, <b>Софокл</b> і <b>Евріпід</b>; «батько комедії» — <b>Аристофан</b>; найвідоміший римський комедіограф — <b>Плавт</b>.</div>
+<table class="tbl"><tr><th>Автор</th><th>Час</th><th>Відомі твори</th><th>Особливість</th></tr>
+<tr><td><b>Есхіл</b></td><td>бл. 525–456 до н. е.</td><td>«Прометей закутий», трилогія «Орестея»</td><td>«Батько трагедії», увів другого актора</td></tr>
+<tr><td><b>Софокл</b></td><td>бл. 496–406 до н. е.</td><td>«Цар Едіп», «Антігона»</td><td>Увів третього актора, мальовані декорації</td></tr>
+<tr><td><b>Евріпід</b></td><td>бл. 480–406 до н. е.</td><td>«Медея», «Іфігенія в Авліді»</td><td>Показував людей «такими, як вони є», глибокі почуття</td></tr>
+<tr><td><b>Аристофан</b></td><td>бл. 446–386 до н. е.</td><td>«Хмари», «Жаби», «Птахи», «Мир»</td><td>«Батько комедії», політична сатира</td></tr>
+<tr><td><b>Плавт</b></td><td>бл. 254–184 до н. е.</td><td>«Скарб», «Хвалькуватий воїн»</td><td>Римська комедія: плутанина, хитрі слуги</td></tr></table>
+${ex('Людина — міра всіх речей.','Протагор, сучасник Софокла')}
+<div class="note">Сюжети античних авторів досі ставлять театри світу — «Медея», «Антігона», «Цар Едіп» живуть на сцені 2500 років!</div>`,
+[{type:'match',title:'Автор — твір',pairs:[['Есхіл','«Прометей закутий»'],['Софокл','«Цар Едіп»'],['Евріпід','«Медея»'],['Аристофан','«Жаби»'],['Плавт','«Хвалькуватий воїн»']]},
+{type:'sort',title:'Трагік чи комедіограф?',buckets:['Трагедії','Комедії'],items:[['Есхіл',0],['Софокл',0],['Евріпід',0],['Аристофан',1],['Плавт',1]]},
+{type:'cross',title:'Кросворд «Античні автори»',words:[['ЕСХІЛ','«Батько трагедії»'],['СОФОКЛ','Автор «Антігони»'],['ЕВРІПІД','Автор «Медеї»'],['АРИСТОФАН','«Батько комедії»'],['ПЛАВТ','Римський комедіограф'],['ЕДІП','Цар — герой трагедії Софокла'],['МЕДЕЯ','Героїня трагедії Евріпіда']]}]);
+MORE[6]=[['Кого називають «батьком трагедії»?',['Есхіла','Плавта','Аристофана'],'Есхіл увів другого актора й розвинув діалог.'],['Хто написав «Цар Едіп»?',['Софокл','Евріпід','Есхіл'],'Трагедія про царя, який не зміг уникнути долі.'],['Хто автор «Медеї»?',['Евріпід','Софокл','Плавт'],'Евріпід показував глибокі людські почуття.'],['Кого називають «батьком комедії»?',['Аристофана','Софокла','Есхіла'],'Його комедії висміювали політиків Афін.'],['Плавт — представник театру…',['Давнього Риму','Давньої Греції','Японії'],'Плавт — римський комедіограф.'],['Хто з трагіків увів третього актора?',['Софокл','Евріпід','Аристофан'],'Також він увів мальовані декорації.'],['Про кого трагедія Есхіла «Прометей закутий»?',['Про титана, що дав людям вогонь','Про царя Едіпа','Про воїна-хвалька'],'Прометея покарав Зевс.'],['Що характерно для комедій Плавта?',['Плутанина та хитрі слуги','Трагічна загибель героя','Відсутність діалогів'],'Плавт розважав римську публіку.']];
+GOALS[6]=['називати авторів античного театру та їхні твори','розрізняти трагіків і комедіографів','пояснювати внесок кожного автора'];
+LWORDS[6]=[['ЕСХІЛ','«Батько трагедії»'],['СОФОКЛ','Автор «Антігони»'],['ЕВРІПІД','Автор «Медеї»'],['АРИСТОФАН','«Батько комедії»'],['ПЛАВТ','Римський комедіограф'],['АНТІГОНА','Героїня трагедії Софокла'],['ПРОМЕТЕЙ','Титан, який дав людям вогонь']];
+
+/* ===== Модуль 3 ===== */
+L(7,'Епоха Відродження — віра в особистість людини, в її духовні здібності',
+`<div class="def"><b>Відродження (Ренесанс)</b> — епоха XIV–XVI ст., коли в центрі уваги опинилася <b>людина</b>, її розум, почуття і <b>творчі здібності</b>. Цей світогляд називають <b>гуманізмом</b>.</div>
+<div class="rules"><div class="rule"><h4>🏛️ Відродження античності</h4>Митці знову читали й ставили античних авторів.</div><div class="rule"><h4>🧑 Гуманізм</h4>Людина — найвища цінність, творець своєї долі.</div><div class="rule"><h4>🇮🇹 Італія</h4>Батьківщина Ренесансу; тут народилася <b>комедія дель арте</b>.</div><div class="rule"><h4>🏟️ Нові театри</h4>Театро Олімпіко у Віченці (1585) — один із перших критих театрів.</div></div>
+<table class="tbl"><tr><th>Маска комедії дель арте</th><th>Характер</th></tr><tr><td>Арлекін</td><td>Спритний, веселий слуга в костюмі з ромбів</td></tr><tr><td>Панталоне</td><td>Скупий старий купець</td></tr><tr><td>Доктор</td><td>Учений-базіка</td></tr><tr><td>Коломбіна</td><td>Кмітлива служниця</td></tr><tr><td>П’єро</td><td>Сумний мрійник</td></tr></table>
+<div class="note">У комедії дель арте не було готового тексту: актори <b>імпровізували</b> за коротким планом — сценарієм.</div>`,
+[{type:'match',title:'Маска — характер',pairs:[['Арлекін','Спритний слуга в ромбах'],['Панталоне','Скупий старий купець'],['Доктор','Учений-базіка'],['Коломбіна','Кмітлива служниця'],['П’єро','Сумний мрійник']]},
+{type:'tf',items:[['Батьківщина Відродження — Італія.',true,'Саме в Італії почалося Відродження.'],['Гуманізм ставить у центр уваги людину.',true,'Людина — найвища цінність.'],['Актори комедії дель арте завжди вчили напам’ять готовий текст.',false,'Вони імпровізували за сценарієм.'],['Епоха Відродження — це XIV–XVI століття.',true,'Саме тоді розквітли мистецтво і наука.']]},
+{type:'memory',title:'Пам’ять: епоха Відродження',pairs:[['Ренесанс','Відродження'],['Гуманізм','Людина — найвища цінність'],['Імпровізація','Гра без готового тексту'],['Сценарій','Короткий план вистави'],['Арлекін','Маска спритного слуги'],['Італія','Батьківщина Ренесансу']]}]);
+MORE[7]=[['Що означає слово «Ренесанс»?',['Відродження','Занепад','Просвітництво'],'Відроджували античну культуру.'],['Що є головною цінністю для гуманістів?',['Людина','Багатство','Влада'],'Людина — творець своєї долі.'],['Де народилася комедія дель арте?',['В Італії','В Англії','У Франції'],'Італійський театр масок.'],['Як грали актори комедії дель арте?',['Імпровізували за сценарієм','Читали з листа','Мовчали'],'Сценарій — лише короткий план.'],['Хто такий Панталоне?',['Скупий старий купець','Веселий слуга','Сумний мрійник'],'Одна з постійних масок.'],['Який костюм у Арлекіна?',['З різнокольорових ромбів','Чорний','Білий балахон'],'Ромби — його відмітна ознака.'],['Коли тривала епоха Відродження?',['У XIV–XVI ст.','У V ст. до н. е.','У XX ст.'],'Ренесанс змінив Середньовіччя.'],['Як називається один із перших критих театрів (1585)?',['Театро Олімпіко','Глобус','Ла Скала'],'Він розташований у Віченці.']];
+GOALS[7]=['пояснювати, що таке гуманізм','називати маски комедії дель арте','пояснювати роль імпровізації'];
+LWORDS[7]=[['РЕНЕСАНС','Інша назва Відродження'],['ГУМАНІЗМ','Світогляд, де людина — найвища цінність'],['АРЛЕКІН','Спритний слуга в ромбах'],['КОЛОМБІНА','Кмітлива служниця'],['ІТАЛІЯ','Батьківщина Відродження'],['ІМПРОВІЗАЦІЯ','Гра без готового тексту'],['СЦЕНАРІЙ','Короткий план вистави']];
+
+L(8,'Творчість Вільяма Шекспіра як вершина епохи Відродження',
+`<div class="def"><b>Вільям Шекспір</b> (1564–1616) — англійський драматург, поет і актор, автор понад <b>35 п’єс</b>. Його твори — <b>вершина</b> ренесансного театру, бо показують людину з усіма її пристрастями.</div>
+<div class="timeline"><div><b>1564</b> — народився в місті Стратфорд-на-Ейвоні.</div><div><b>бл. 1590</b> — переїжджає до Лондона, стає актором і драматургом.</div><div><b>1599</b> — разом із трупою відкриває театр <b>«Глобус»</b>.</div><div><b>1616</b> — помер у Стратфорді.</div></div>
+<table class="tbl"><tr><th>Жанр</th><th>П’єси</th></tr><tr><td>Трагедії</td><td>«Ромео і Джульєтта», «Гамлет», «Отелло», «Король Лір», «Макбет»</td></tr><tr><td>Комедії</td><td>«Сон літньої ночі», «Дванадцята ніч», «Приборкання норовливої»</td></tr><tr><td>Історичні хроніки</td><td>«Річард III», «Генріх V»</td></tr></table>
+${ex('Бути чи не бути — ось питання.','В. Шекспір, «Гамлет»')}
+${ex('Весь світ — театр, а люди в ньому — актори.','В. Шекспір, «Як вам це сподобається»')}`,
+[{type:'sort',title:'Трагедія чи комедія?',buckets:['Трагедія','Комедія'],items:[['«Гамлет»',0],['«Сон літньої ночі»',1],['«Отелло»',0],['«Дванадцята ніч»',1],['«Ромео і Джульєтта»',0],['«Приборкання норовливої»',1],['«Макбет»',0]]},
+{type:'order',title:'Біографія Шекспіра',items:['Народження в Стратфорді-на-Ейвоні (1564)','Переїзд до Лондона','Відкриття театру «Глобус» (1599)','Смерть у Стратфорді (1616)']},
+{type:'quiz',qs:[{q:'Хто сказав «Бути чи не бути — ось питання»?',o:['Гамлет','Ромео','Макбет'],a:0,e:'Знаменитий монолог принца Данського.'},{q:'Скільки п’єс приблизно написав Шекспір?',o:['Понад 35','5','300'],a:0,e:'Йому приписують 37–38 п’єс.'}]}]);
+MORE[8]=[['Де народився Шекспір?',['У Стратфорді-на-Ейвоні','У Лондоні','У Мілані'],'Там же він і помер.'],['Хто такі Ромео і Джульєтта?',['Закохані з ворогуючих родин','Брат і сестра','Король і королева'],'Трагедія про кохання і ворожнечу.'],['Який театр пов’язаний із Шекспіром?',['«Глобус»','Ла Скала','Комеді Франсез'],'«Глобус» відкрито в 1599 році.'],['Хто такий Отелло?',['Венеційський полководець','Данський принц','Шотландський король'],'Трагедія про ревнощі та довіру.'],['«Весь світ — театр…» — це слова з п’єси…',['«Як вам це сподобається»','«Гамлет»','«Макбет»'],'Одна з найвідоміших цитат Шекспіра.'],['Який жанр «Сон літньої ночі»?',['Комедія','Трагедія','Хроніка'],'Весела казкова комедія.'],['Що таке історична хроніка?',['П’єса про події з історії Англії','Газетна стаття','Казка'],'Наприклад, «Річард III».'],['Коли помер Шекспір?',['У 1616 році','У 1564 році','У 1700 році'],'Він прожив 52 роки.']];
+GOALS[8]=['розповідати про життя Шекспіра','називати його трагедії, комедії та хроніки','пояснювати, чому творчість Шекспіра — вершина Ренесансу'];
+LWORDS[8]=[['ШЕКСПІР','Великий англійський драматург'],['ГАМЛЕТ','Данський принц'],['ОТЕЛЛО','Венеційський полководець'],['МАКБЕТ','Шотландський король-узурпатор'],['ГЛОБУС','Театр Шекспіра'],['ЛОНДОН','Місто, де працював Шекспір'],['ДЖУЛЬЄТТА','Кохана Ромео']];
+
+L(9,'Основний конфлікт у п’єсах Шекспіра: воля людини і протидія інших людей',
+`<div class="def"><b>Конфлікт</b> — зіткнення протилежних сил, на якому тримається п’єса. У Шекспіра головний конфлікт — <b>вільна воля людини</b> і <b>протидія</b> інших людей та обставин, які зводять її бажання нанівець.</div>
+<div class="scheme"><span>Бажання героя</span><em>⚡</em><span>Протидія (родина, суспільство, влада)</span><em>→</em><span>Боротьба</span><em>→</em><span>Розв’язка (часто трагічна)</span></div>
+<table class="tbl"><tr><th>П’єса</th><th>Чого прагне герой</th><th>Що протидіє</th></tr>
+<tr><td>«Ромео і Джульєтта»</td><td>Кохати й бути разом</td><td>Ворожнеча родин Монтеккі й Капулетті</td></tr>
+<tr><td>«Гамлет»</td><td>Відновити справедливість</td><td>Підступний король Клавдій, брехня двору</td></tr>
+<tr><td>«Отелло»</td><td>Щастя з Дездемоною</td><td>Інтриги заздрісного Яго</td></tr>
+<tr><td>«Король Лір»</td><td>Почути любов доньок</td><td>Лестощі й зрада старших доньок</td></tr></table>
+<div class="rules"><div class="rule"><h4>📈 Етапи дії</h4>Експозиція → зав’язка → розвиток дії → кульмінація → розв’язка.</div><div class="rule"><h4>🔥 Кульмінація</h4>Найвища точка напруження конфлікту.</div></div>`,
+[{type:'order',title:'Етапи розвитку дії в п’єсі',items:['Експозиція','Зав’язка','Розвиток дії','Кульмінація','Розв’язка']},
+{type:'match',title:'Герой — те, що йому протидіє',pairs:[['Ромео і Джульєтта','Ворожнеча родин'],['Гамлет','Підступний король Клавдій'],['Отелло','Інтриги Яго'],['Король Лір','Зрада старших доньок']]},
+{type:'fill',items:['Зіткнення протилежних сил у п’єсі — це {конфлікт|сюжет|жанр}.','Найвища точка напруження — {кульмінація|експозиція|зав’язка}.','Початок конфлікту — це {зав’язка|розв’язка|кульмінація}.','Інтриги проти Отелло плів {Яго|Клавдій|Ромео}.']}]);
+MORE[9]=[['Що таке конфлікт?',['Зіткнення протилежних сил','Опис природи','Список дійових осіб'],'На конфлікті тримається дія.'],['Що заважає Ромео і Джульєтті?',['Ворожнеча родин','Війна','Хвороба'],'Монтеккі й Капулетті ворогували.'],['Хто протидіє Гамлету?',['Король Клавдій','Яго','Макбет'],'Клавдій убив батька Гамлета.'],['Що таке кульмінація?',['Найвища точка напруження','Початок дії','Перелік героїв'],'Після неї настає розв’язка.'],['Хто плів інтриги проти Отелло?',['Яго','Полоній','Меркуціо'],'Заздрісний Яго обманув Отелло.'],['Що таке зав’язка?',['Подія, з якої починається конфлікт','Кінець п’єси','Декорація'],'Зав’язка запускає дію.'],['Яка розв’язка найчастіше в трагедіях Шекспіра?',['Трагічна','Весела','Відкрита'],'Герої часто гинуть.'],['Що зводить нанівець волю героїв Шекспіра?',['Протидія інших людей','Природа','Погода'],'Головний конфлікт — людина проти людей.']];
+GOALS[9]=['пояснювати, що таке конфлікт у драмі','визначати конфлікт у п’єсах Шекспіра','називати етапи розвитку дії'];
+LWORDS[9]=[['КОНФЛІКТ','Зіткнення протилежних сил'],['КУЛЬМІНАЦІЯ','Найвища точка напруження'],['ЕКСПОЗИЦІЯ','Знайомство з героями на початку п’єси'],['ДЕЗДЕМОНА','Дружина Отелло'],['ЯГО','Інтриган із «Отелло»'],['КЛАВДІЙ','Підступний король у «Гамлеті»'],['ВОЛЯ','Те, що протиставляє герой обставинам']];
+
+L(10,'Театр «Глобус»: будівля без декорацій і завіси',
+`<div class="def">Театр <b>«Глобус»</b> (1599) — круглий (багатокутний) дерев’яний театр у Лондоні, де грала трупа Шекспіра. Він не мав <b>даху</b> над партером, <b>декорацій</b> і <b>завіси</b> між сценою й залою.</div>
+<div class="rules"><div class="rule"><h4>🏗️ Будівля</h4>Дерев’яна, 20-кутна, три яруси галерей; вміщала до 3 000 глядачів.</div><div class="rule"><h4>🌤️ Без даху</h4>Над партером — відкрите небо; вистави вдень, при денному світлі.</div><div class="rule"><h4>🪧 Без декорацій</h4>Місце дії позначали табличкою («Верона») або словами героїв.</div><div class="rule"><h4>🚫 Без завіси</h4>Сцена виступала в зал; глядачі стояли з трьох боків.</div><div class="rule"><h4>👦 Без актрис</h4>Жіночі ролі грали юнаки.</div><div class="rule"><h4>🚩 Прапор</h4>Піднятий прапор над театром означав: сьогодні вистава!</div></div>
+<div class="timeline"><div><b>1599</b> — збудовано «Глобус».</div><div><b>1613</b> — згорів через постріл гармати під час вистави.</div><div><b>1614</b> — відбудований.</div><div><b>1642</b> — закритий пуританами.</div><div><b>1997</b> — відкрито сучасну реконструкцію.</div></div>
+${ex('Над входом, за переказом, був напис «Весь світ лицедіє».')}`,
+[{type:'tf',items:[['«Глобус» мав розкішну завісу.',false,'Завіси не було, сцена виступала в зал.'],['Вистави в «Глобусі» відбувалися вдень.',true,'Освітлення — денне світло.'],['Місце дії позначали табличками.',true,'Декорацій не використовували.'],['Жіночі ролі грали актриси.',false,'Їх грали юнаки.']]},
+{type:'order',title:'Історія «Глобуса»',items:['Будівництво театру (1599)','Пожежа (1613)','Відбудова (1614)','Закриття пуританами (1642)','Сучасна реконструкція (1997)']},
+{type:'flip',title:'Особливості «Глобуса»',cards:[['Прапор','Знак, що сьогодні вистава'],['Табличка','Позначала місце дії'],['Партер','Глядачі стояли просто неба'],['Галереї','Три яруси сидячих місць'],['Юнаки','Виконували жіночі ролі'],['Денне світло','Єдине освітлення вистави']]}]);
+MORE[10]=[['Коли збудовано «Глобус»?',['У 1599 році','У 1699 році','У 1499 році'],'Його звела трупа Шекспіра.'],['Чому «Глобус» згорів у 1613 році?',['Через постріл гармати під час вистави','Через блискавку','Через свічки'],'Іскра влучила в солом’яний дах.'],['Як позначали місце дії в «Глобусі»?',['Табличкою або словами героїв','Великими декораціями','Відео на екрані'],'Решту домальовувала уява глядача.'],['Що означав піднятий прапор над театром?',['Сьогодні вистава','Свято короля','Пожежу'],'Колір прапора міг підказувати жанр.'],['Хто грав жіночі ролі?',['Юнаки','Актриси','Діти-дівчата'],'Жінкам не дозволяли грати.'],['Чи була в «Глобусі» завіса?',['Ні','Так, червона','Так, залізна'],'Сцена виступала в зал.'],['Скільки глядачів вміщав «Глобус»?',['До 3 000','До 100','До 30 000'],'Багато глядачів стояли в партері.'],['Коли відкрито сучасну реконструкцію «Глобуса»?',['У 1997 році','У 1797 році','У 2020 році'],'Її збудували поряд із місцем оригіналу.']];
+GOALS[10]=['описувати будову театру «Глобус»','пояснювати, як обходилися без декорацій і завіси','розповідати історію «Глобуса»'];
+LWORDS[10]=[['ГЛОБУС','Театр Шекспіра'],['ПРАПОР','Знак, що сьогодні вистава'],['ТАБЛИЧКА','Позначала місце дії'],['ГАЛЕРЕЯ','Ярус сидячих місць'],['ЗАВІСА','Чого не було в «Глобусі»'],['ПОЖЕЖА','Знищила театр у 1613 році'],['ЮНАКИ','Грали жіночі ролі']];
+
+/* ===== Модуль 4: Вертеп ===== */
+L(11,'Роль братських шкіл у становленні та розвитку вертепу',
+`<div class="def"><b>Братські школи</b> (кінець XVI — XVII ст.) — школи при православних братствах. Їхні учні — <b>спудеї</b> — ставили <b>шкільну драму</b> і на Різдво мандрували з <b>вертепом</b>, поширюючи його по всій Україні.</div>
+<div class="timeline"><div><b>1586</b> — заснована Львівська братська школа.</div><div><b>1615</b> — заснована Київська братська школа.</div><div><b>1632</b> — на її основі постає Києво-Могилянська колегія (згодом академія).</div></div>
+<div class="rules"><div class="rule"><h4>🎓 Шкільна драма</h4>Вистави на релігійні та моральні теми, які писали викладачі поетики.</div><div class="rule"><h4>🚶 Мандрівні дяки</h4>Спудеї й дяки на канікулах ходили селами з вертепом, щоб заробити на навчання.</div><div class="rule"><h4>📜 Інтермедії</h4>Смішні сценки між діями шкільної драми — з них виросла побутова частина вертепу.</div></div>
+<div class="note">Братські школи навчали <b>грамоти, співу, мов, риторики й поетики</b> — і театр був частиною освіти.</div>`,
+[{type:'flip',title:'Ключові поняття',cards:[['Братство','Об’єднання міщан для захисту віри й освіти'],['Спудей','Учень братської школи чи академії'],['Шкільна драма','Вистава, яку ставили в школі'],['Інтермедія','Весела сценка між діями драми'],['Мандрівний дяк','Освічений мандрівник, що ходив з вертепом'],['Вертеп','Ляльковий театр у скрині']]},
+{type:'order',title:'Хронологія',items:['Львівська братська школа (1586)','Київська братська школа (1615)','Києво-Могилянська колегія (1632)']},
+{type:'quiz',qs:[{q:'Хто поширював вертеп Україною?',o:['Спудеї та мандрівні дяки','Королівські актори','Іноземні купці'],a:0,e:'Вони ходили з вертепом на Різдво.'},{q:'З чого виросла побутова частина вертепу?',o:['З інтермедій шкільної драми','З опери','З балету'],a:0,e:'Інтермедії були веселими сценками між діями.'}]}]);
+MORE[11]=[['Як називали учнів братських шкіл?',['Спудеї','Гімназисти','Ліцеїсти'],'Від латинського «студіювати».'],['Коли заснована Львівська братська школа?',['У 1586 році','У 1686 році','У 1886 році'],'Одна з перших братських шкіл.'],['Що таке шкільна драма?',['Вистава, яку ставили в школі','Іспит із читання','Шкільний підручник'],'Її писали викладачі поетики.'],['Що таке інтермедія?',['Весела сценка між діями','Молитва','Пісня хору'],'Інтермедії розважали глядачів.'],['Навіщо спудеї мандрували з вертепом?',['Щоб заробити на навчання','Щоб знайти роботу актора','Щоб утекти зі школи'],'Їх винагороджували за виставу.'],['Яка установа постала на основі Київської братської школи?',['Києво-Могилянська колегія','Львівський університет','Острозька академія'],'Це сталося в 1632 році.'],['Що вивчали в братських школах?',['Грамоту, спів, мови, поетику','Лише математику','Лише ремесла'],'Театр був частиною освіти.'],['Коли спудеї ходили з вертепом?',['На Різдво','Влітку','Восени'],'Вертеп — різдвяна вистава.']];
+GOALS[11]=['пояснювати роль братських шкіл у розвитку театру','розповідати, хто такі спудеї та мандрівні дяки','пояснювати зв’язок шкільної драми й вертепу'];
+LWORDS[11]=[['СПУДЕЙ','Учень братської школи'],['БРАТСТВО','Об’єднання міщан для освіти'],['ВЕРТЕП','Ляльковий театр у скрині'],['ІНТЕРМЕДІЯ','Весела сценка між діями'],['ДЯК','Мандрівний освічений співак'],['РІЗДВО','Свято, коли ходили з вертепом'],['ПОЕТИКА','Наука про віршування, яку вивчали в школі']];
+
+L(12,'Форма вертепної драми: «поважний текст і весела інтермедія»',
+`<div class="def"><b>Вертеп</b> — український ляльковий театр у <b>двоповерховій скрині</b>. На <b>верхньому поверсі</b> — поважна <b>релігійна частина</b> про Різдво, на <b>нижньому</b> — весела <b>побутова інтермедія</b>.</div>
+<table class="tbl"><tr><th></th><th>Верхній поверх</th><th>Нижній поверх</th></tr>
+<tr><td>Зміст</td><td>Народження Ісуса, пастухи, царі-волхви, жорстокий цар Ірод</td><td>Сценки з життя: запорожець, циган, баба, солдат, шинкар</td></tr>
+<tr><td>Настрій</td><td>Урочистий, поважний</td><td>Веселий, гумористичний</td></tr>
+<tr><td>Мова</td><td>Книжна, піснеспіви</td><td>Жива народна мова, жарти</td></tr></table>
+<div class="rules"><div class="rule"><h4>🪆 Ляльки</h4>Дерев’яні фігурки на дротах рухалися в прорізах підлоги скрині.</div><div class="rule"><h4>🧔 Вертепник</h4>Водив ляльок і говорив за всіх; йому допомагали музики та співаки.</div><div class="rule"><h4>⚔️ Запорожець</h4>Улюблений герой — сміливий, дотепний, перемагає всіх кривдників.</div><div class="rule"><h4>⭐ Зірка</h4>Вертеп часто супроводжували зіркою на палиці.</div></div>`,
+[{type:'sort',title:'Верхній чи нижній поверх?',buckets:['Верхній (релігійна частина)','Нижній (побутова частина)'],items:[['Цар Ірод',0],['Запорожець',1],['Пастухи',0],['Баба з дідом',1],['Царі-волхви',0],['Шинкар',1],['Ангел',0],['Циган',1]]},
+{type:'tf',items:[['Скриня вертепу мала два поверхи.',true,'Верхній — для релігійної, нижній — для побутової частини.'],['Ляльок вертепу водили на нитках зверху.',false,'Ляльки рухалися на дротах у прорізах підлоги.'],['Запорожець — улюблений герой вертепу.',true,'Він дотепний і сміливий.'],['Побутова частина звучала книжною мовою.',false,'Там звучала жива народна мова.']]},
+{type:'match',title:'Герой — роль у вертепі',pairs:[['Ірод','Жорстокий цар'],['Волхви','Принесли дари'],['Запорожець','Сміливий захисник'],['Вертепник','Водив ляльок і говорив за них'],['Ангел','Сповістив про народження']]}]);
+MORE[12]=[['Скільки поверхів мала вертепна скриня?',['Два','Один','Три'],'Верхній і нижній.'],['Що показували на верхньому поверсі?',['Різдвяну історію','Сценки з життя села','Казки про тварин'],'Поважна релігійна частина.'],['Що показували на нижньому поверсі?',['Веселі побутові сценки','Різдво','Битви з турками'],'Інтермедія з народними героями.'],['Хто такий вертепник?',['Той, хто водив ляльок і говорив за них','Цар','Глядач'],'Йому допомагали музики та співаки.'],['Як рухалися ляльки вертепу?',['На дротах у прорізах підлоги','На нитках зверху','Самі'],'Прорізи були в дні скрині.'],['Хто з героїв — улюбленець глядачів?',['Запорожець','Ірод','Чорт'],'Він перемагав кривдників.'],['Яка мова звучала в побутовій частині?',['Жива народна','Латинська','Давньогрецька'],'З жартами й прислів’ями.'],['Хто з персонажів належить до релігійної частини?',['Царі-волхви','Шинкар','Циган'],'Волхви несли дари новонародженому.']];
+GOALS[12]=['описувати будову вертепної скрині','розрізняти релігійну та побутову частини вертепу','називати персонажів вертепу'];
+LWORDS[12]=[['ВЕРТЕП','Ляльковий театр у скрині'],['СКРИНЯ','Двоповерхова сцена вертепу'],['ІРОД','Жорстокий цар'],['ЗАПОРОЖЕЦЬ','Улюблений герой вертепу'],['ВЕРТЕПНИК','Той, хто водить ляльок'],['ВОЛХВИ','Царі, що принесли дари'],['ЛЯЛЬКА','Фігурка на дроті']];
+
+L(13,'Мандрівні актори: вистави на вулицях, площах, ярмарках',
+`<div class="def">Для більшості людей минулого театр приходив <b>сам</b>: <b>мандрівні актори</b> давали вистави <b>просто неба</b> — на <b>вулицях</b>, <b>площах</b> і <b>ярмарках</b>.</div>
+<div class="rules"><div class="rule"><h4>🛒 Ярмарок</h4>Місце, де збиралося найбільше людей: сюди йшли вертепники, ляльководи, музики.</div><div class="rule"><h4>🎪 Балаган</h4>Тимчасова дерев’яна будка для вистав на ярмарку.</div><div class="rule"><h4>🧸 Петрушка й «скоморохи»</h4>Ляльковий герой-жартівник і мандрівні актори-музики.</div><div class="rule"><h4>🐻 Атракціони</h4>Фокусники, акробати, дресировані тварини, канатоходці.</div></div>
+<table class="tbl"><tr><th>Переваги вуличного театру</th><th>Труднощі</th></tr><tr><td>Великий і різний глядач; живий контакт; швидка реакція на події</td><td>Погода, шум, бідність акторів, гоніння з боку влади й церкви</td></tr></table>
+<div class="note">Вуличний театр живий і сьогодні: <b>фестивалі вуличних театрів</b>, мім і живі статуї на площах.</div>`,
+[{type:'flip',title:'Театр просто неба',cards:[['Ярмарок','Місце торгівлі й розваг'],['Балаган','Тимчасова будка для вистав'],['Мандрівна трупа','Актори, що переїжджають з місця на місце'],['Скоморох','Мандрівний актор-музика'],['Акробат','Виконує трюки й стрибки'],['Канатохідець','Ходить по натягнутому канату']]},
+{type:'tf',items:[['Мандрівні актори грали лише в палацах.',false,'Вони грали на вулицях і ярмарках.'],['Балаган — тимчасова будка для вистав.',true,'Її ставили на ярмарках.'],['Погода могла зірвати вуличну виставу.',true,'Вистави були просто неба.'],['Вуличний театр зник назавжди.',false,'Він живий на сучасних фестивалях.']]},
+{type:'quiz',qs:[{q:'Чому актори йшли саме на ярмарки?',o:['Там збиралося найбільше людей','Там платили податки','Там жили королі'],a:0,e:'Ярмарок — центр торгівлі й розваг.'},{q:'Що таке балаган?',o:['Тимчасова будка для вистав','Музичний інструмент','Костюм актора'],a:0,e:'Балагани ставили на ярмарках.'}]}]);
+MORE[13]=[['Де грали мандрівні актори?',['На вулицях, площах і ярмарках','Лише в оперних театрах','У школах'],'Театр приходив до людей.'],['Що таке балаган?',['Тимчасова будка для вистав','Танець','Маска'],'Балагани будували на ярмарках.'],['Хто такий скоморох?',['Мандрівний актор-музика','Цар','Учень школи'],'Скоморохи розважали людей на святах.'],['Яка головна перевага вуличного театру?',['Великий і різний глядач','Дорогі квитки','Тиша'],'Вистава відкрита для всіх.'],['Що заважало вуличним виставам?',['Погода і шум','Завіса','Електрика'],'Вистави відбувалися просто неба.'],['Хто, крім акторів, виступав на ярмарках?',['Акробати й фокусники','Судді','Вчителі'],'Ярмарок був святом розваг.'],['Чи існує вуличний театр сьогодні?',['Так, на фестивалях і площах','Ні, його заборонили','Лише в музеях'],'Є фестивалі вуличних театрів.'],['Як називають групу акторів, що переїжджає?',['Мандрівна трупа','Оркестр','Хор'],'Трупа — колектив акторів.']];
+GOALS[13]=['пояснювати, як театр приходив до людей у минулому','називати види вуличних видовищ','порівнювати переваги й труднощі театру просто неба'];
+LWORDS[13]=[['ЯРМАРОК','Місце торгівлі й розваг'],['БАЛАГАН','Тимчасова будка для вистав'],['ТРУПА','Колектив акторів'],['СКОМОРОХ','Мандрівний актор-музика'],['АКРОБАТ','Виконує трюки'],['ПЛОЩА','Відкрите місце в місті'],['ФОКУСНИК','Показує дива спритності']];
+
+L(14,'Історія вертепу: перші згадки про український вертеп',
+`<div class="def">Вертеп з’явився в Україні наприкінці <b>XVI ст.</b> разом із братськими школами. Найдавніший відомий запис вертепної драми — <b>Сокиринський вертеп</b> (1770). Сьогодні вертеп — жива <b>різдвяна традиція</b>.</div>
+<div class="timeline"><div><b>Кінець XVI ст.</b> — перші свідчення про вертепні вистави на Галичині (часто згадують 1591 р.).</div><div><b>XVII–XVIII ст.</b> — розквіт вертепу; його поширюють спудеї й мандрівні дяки.</div><div><b>1770</b> — записано текст <b>Сокиринського вертепу</b> (Чернігівщина).</div><div><b>XIX ст.</b> — вертеп переходить у народне середовище.</div><div><b>XX–XXI ст.</b> — вертеп із живими акторами, фестивалі вертепів.</div></div>
+<div class="rules"><div class="rule"><h4>🏛️ Слово «вертеп»</h4>Означає «печера» — місце, де, за переказом, народився Ісус.</div><div class="rule"><h4>🌍 Подібні театри</h4>Польська шопка, білоруська батлейка — родичі українського вертепу.</div><div class="rule"><h4>🧑‍🤝‍🧑 Живий вертеп</h4>Сучасні колядники грають ролі самі, без ляльок.</div></div>`,
+[{type:'order',title:'Історія вертепу',items:['Перші свідчення (кінець XVI ст.)','Розквіт і поширення спудеями (XVII–XVIII ст.)','Запис Сокиринського вертепу (1770)','Перехід у народне середовище (XIX ст.)','Живий вертеп і фестивалі (XX–XXI ст.)']},
+{type:'match',title:'Родичі вертепу',pairs:[['Шопка','Польща'],['Батлейка','Білорусь'],['Вертеп','Україна']]},
+{type:'fill',items:['Слово «вертеп» означає {печера|палац|площа}.','Найдавніший відомий запис — {Сокиринський|Київський|Львівський} вертеп.','Його записано в {1770|1570|1970} році.','Сьогодні часто грають {живий|електронний|мовчазний} вертеп.']}]);
+MORE[14]=[['Що означає слово «вертеп»?',['Печера','Скриня','Свято'],'Місце народження Ісуса за переказом.'],['Коли з’явився вертеп в Україні?',['Наприкінці XVI ст.','У X ст.','У XX ст.'],'Разом із братськими школами.'],['Як називається найдавніший відомий запис вертепної драми?',['Сокиринський вертеп','Глобус','Березіль'],'Записаний 1770 року.'],['Як називається польський родич вертепу?',['Шопка','Батлейка','Кабукі'],'Шопка теж показує різдвяну історію.'],['Як називається білоруський родич вертепу?',['Батлейка','Шопка','Петрушка'],'Батлейка — ляльковий театр.'],['Що таке живий вертеп?',['Вертеп, де ролі грають люди','Вертеп із тваринами','Вертеп по телевізору'],'Колядники грають самі.'],['Хто розносив вертеп у XVII–XVIII ст.?',['Спудеї й дяки','Королі','Купці з Італії'],'Учні братських шкіл.'],['Яке свято пов’язане з вертепом?',['Різдво','Великдень','Івана Купала'],'Вертеп — різдвяна вистава.']];
+GOALS[14]=['розповідати історію українського вертепу','пояснювати походження слова «вертеп»','називати споріднені театри інших народів'];
+LWORDS[14]=[['СОКИРИНЦІ','Село, де записано вертеп 1770 року'],['ПЕЧЕРА','Значення слова «вертеп»'],['ШОПКА','Польський родич вертепу'],['БАТЛЕЙКА','Білоруський родич вертепу'],['КОЛЯДНИКИ','Ходять на Різдво зі співом'],['ТРАДИЦІЯ','Звичай, що передається поколіннями'],['ЗІРКА','Символ, з яким ходять колядники']];
+
+L(15,'Підсумок за І семестр',
+`<div class="def">За І семестр ми пройшли шлях від <b>сучасного театру</b> до <b>античності</b>, <b>Відродження</b> і <b>українського вертепу</b>. Головне: театр — <b>синтетичне мистецтво</b>, що завжди відображає свою <b>епоху</b>.</div>
+<table class="tbl"><tr><th>Модуль</th><th>Головне</th></tr>
+<tr><td>Сучасний театр</td><td>Традиції країн, великі театри Європи та України</td></tr>
+<tr><td>Античний театр</td><td>Діоніс, трагедія й комедія, театрон — орхестра — скене, маски, Есхіл, Софокл, Евріпід, Аристофан, Плавт</td></tr>
+<tr><td>Відродження</td><td>Гуманізм, комедія дель арте, Шекспір, конфлікт волі й протидії, «Глобус»</td></tr>
+<tr><td>Вертеп</td><td>Братські школи, двоповерхова скриня, мандрівні актори, Сокиринський вертеп</td></tr></table>`,
+[{type:'sort',title:'До якого модуля належить?',buckets:['Античність','Відродження','Вертеп'],items:[['Орхестра',0],['Арлекін',1],['Запорожець',2],['Котурни',0],['«Глобус»',1],['Спудеї',2],['Софокл',0],['Гамлет',1],['Ірод',2]]},
+{type:'match',title:'Поняття — визначення',pairs:[['Скене','Будівля для переодягання акторів'],['Гуманізм','Людина — найвища цінність'],['Інтермедія','Весела сценка між діями'],['Кульмінація','Найвища точка напруження'],['Партер','Місця на рівні сцени']]},
+{type:'cross',title:'Кросворд семестру',words:[['ДІОНІС','Бог, на честь якого влаштовували вистави'],['ШЕКСПІР','Автор «Гамлета»'],['ВЕРТЕП','Ляльковий театр у скрині'],['ОРХЕСТРА','Кругла площадка для хору'],['ГЛОБУС','Театр без даху над партером'],['МАСКА','Символ театру'],['АРЛЕКІН','Маска спритного слуги']]}]);
+MORE[15]=[['Що таке театрон?',['Місця для глядачів','Будівля для акторів','Площадка хору'],'Частина грецького театру.'],['Хто автор «Ромео і Джульєтти»?',['Шекспір','Мольєр','Софокл'],'Трагедія про кохання.'],['Що показували на верхньому поверсі вертепу?',['Різдвяну історію','Побутові сценки','Казки'],'Поважна частина.'],['Хто такий Арлекін?',['Маска спритного слуги','Цар у вертепі','Грецький бог'],'Маска комедії дель арте.'],['Чому «Глобус» був без завіси?',['Сцена виступала в зал','Її вкрали','Через пожежу'],'Глядачі стояли з трьох боків.'],['Хто з авторів — «батько комедії»?',['Аристофан','Есхіл','Плавт'],'Давньогрецький комедіограф.'],['Хто такі спудеї?',['Учні братських шкіл','Античні актори','Королівські охоронці'],'Вони поширювали вертеп.'],['Яка частина театру називається скене?',['Будівля за орхестрою','Місця глядачів','Взуття актора'],'Там переодягалися актори.']];
+GOALS[15]=['узагальнювати знання про античний, ренесансний театр і вертеп','порівнювати театр різних епох','застосовувати театральні терміни'];
+LWORDS[15]=[['ДІОНІС','Бог театру в Греції'],['ШЕКСПІР','Автор «Гамлета»'],['ВЕРТЕП','Ляльковий театр у скрині'],['ОРХЕСТРА','Площадка для хору'],['ГЛОБУС','Театр Шекспіра'],['СПУДЕЙ','Учень братської школи'],['КОТУРНИ','Високе взуття актора']];
+
+/* ===== Модуль 5: Класицизм ===== */
+L(16,'Епоха класицизму — нормативність, вічні й непорушні правила',
+`<div class="def"><b>Класицизм</b> (XVII — початок XIX ст., найяскравіше у Франції) — напрям, що прагнув <b>порядку</b> й <b>розуму</b>. Театр мав підкорятися <b>непорушним правилам</b>, головне з яких — <b>правило трьох єдностей</b>.</div>
+<div class="rules"><div class="rule"><h4>📍 Єдність місця</h4>Уся дія — в одному місці.</div><div class="rule"><h4>⏰ Єдність часу</h4>Події вкладаються в одну добу.</div><div class="rule"><h4>🎯 Єдність дії</h4>Одна сюжетна лінія, без побічних історій.</div></div>
+<table class="tbl"><tr><th>«Високі» жанри</th><th>«Низькі» жанри</th></tr><tr><td>Трагедія, ода — герої-царі, обов’язок понад почуття, піднесена мова</td><td>Комедія, байка — прості люди, побут, жива мова</td></tr></table>
+<div class="note">Правила класицизму виклав <b>Нікола Буало</b> у трактаті «Мистецтво поетичне» (1674). Великі трагіки — <b>П’єр Корнель</b> («Сід») і <b>Жан Расін</b> («Федра»).</div>
+<div class="warn">Головний конфлікт класицистичної трагедії: <b>обов’язок</b> перед державою проти <b>особистого почуття</b> — і перемагає обов’язок.</div>`,
+[{type:'match',title:'Єдність — зміст',pairs:[['Єдність місця','Дія в одному місці'],['Єдність часу','Події за одну добу'],['Єдність дії','Одна сюжетна лінія']]},
+{type:'sort',title:'«Високий» чи «низький» жанр?',buckets:['Високий','Низький'],items:[['Трагедія',0],['Комедія',1],['Ода',0],['Байка',1]]},
+{type:'quiz',qs:[{q:'Хто виклав правила класицизму в трактаті «Мистецтво поетичне»?',o:['Нікола Буало','Мольєр','Шекспір'],a:0,e:'Трактат 1674 року.'},{q:'Що перемагає в класицистичній трагедії?',o:['Обов’язок','Особисте почуття','Випадок'],a:0,e:'Герой жертвує почуттями заради держави.'},{q:'Хто автор трагедії «Федра»?',o:['Жан Расін','П’єр Корнель','Мольєр'],a:0,e:'Расін — великий трагік класицизму.'}]}]);
+MORE[16]=[['Що таке класицизм?',['Напрям, що прагнув порядку і правил','Напрям, що заперечував правила','Сучасний театр'],'Розум і норма — його основа.'],['Скільки єдностей вимагав класицизм?',['Три','Дві','П’ять'],'Місця, часу і дії.'],['Що означає єдність часу?',['Події за одну добу','Вистава триває годину','Усі герої одного віку'],'Дія вкладається в добу.'],['У якій країні класицизм розквітнув найяскравіше?',['У Франції','У Японії','В Англії'],'Двір Людовіка XIV.'],['Хто автор трагедії «Сід»?',['П’єр Корнель','Жан Расін','Буало'],'Корнель — засновник французької трагедії.'],['Який жанр вважався «високим»?',['Трагедія','Комедія','Байка'],'Герої — царі та полководці.'],['Який головний конфлікт класицистичної трагедії?',['Обов’язок проти почуття','Людина проти природи','Бідність проти багатства'],'Обов’язок перемагає.'],['Яка мова звучала у трагедії класицизму?',['Піднесена, віршована','Сленг','Без слів'],'Олександрійський вірш.']];
+GOALS[16]=['пояснювати, що таке класицизм','називати правило трьох єдностей','розрізняти «високі» й «низькі» жанри'];
+LWORDS[16]=[['КЛАСИЦИЗМ','Напрям порядку і правил'],['ЄДНІСТЬ','Правило класицизму (місця, часу, дії)'],['БУАЛО','Автор «Мистецтва поетичного»'],['КОРНЕЛЬ','Автор трагедії «Сід»'],['РАСІН','Автор трагедії «Федра»'],['ТРАГЕДІЯ','«Високий» жанр класицизму'],['НОРМА','Правило, зразок']];
+
+L(17,'Мольєр — актор і драматург, засновник європейської класичної комедії',
+`<div class="def"><b>Мольєр</b> (справжнє ім’я — <b>Жан-Батист Поклен</b>, 1622–1673) — французький актор, режисер і драматург, творець <b>класичної комедії</b> і жанру <b>комедії-балету</b>.</div>
+<div class="timeline"><div><b>1622</b> — народився в Парижі в родині королівського шпалерника.</div><div><b>1643</b> — разом із друзями створює трупу «Блискучий театр».</div><div><b>1645–1658</b> — 13 років мандрує з трупою провінцією.</div><div><b>1658</b> — трупа грає перед Людовіком XIV і залишається в Парижі.</div><div><b>1673</b> — помирає після четвертої вистави «Уявного хворого», у якій грав головну роль.</div></div>
+<table class="tbl"><tr><th>Комедія</th><th>Кого висміює</th></tr><tr><td>«Тартюф»</td><td>Лицеміра й святенника</td></tr><tr><td>«Скупий»</td><td>Скупість (Гарпагон)</td></tr><tr><td>«Міщанин-шляхтич»</td><td>Багатія, що хоче стати аристократом (комедія-балет з музикою Люллі)</td></tr><tr><td>«Мізантроп»</td><td>Людину, яка ненавидить людські вади</td></tr><tr><td>«Уявний хворий»</td><td>Того, хто вигадує собі хвороби</td></tr></table>
+<div class="note"><b>Комедія-балет</b> — вистава, де драматичні сцени чергуються з музикою і танцями.</div>`,
+[{type:'match',title:'Комедія — кого висміює',pairs:[['«Тартюф»','Лицеміра'],['«Скупий»','Скупість'],['«Міщанин-шляхтич»','Багатія, що хоче стати аристократом'],['«Мізантроп»','Людину, що ненавидить людей'],['«Уявний хворий»','Вигадані хвороби']]},
+{type:'order',title:'Життя Мольєра',items:['Народження в Парижі (1622)','Створення «Блискучого театру» (1643)','Мандри провінцією','Виступ перед Людовіком XIV (1658)','Смерть після «Уявного хворого» (1673)']},
+{type:'tf',items:[['Мольєр — справжнє прізвище драматурга.',false,'Справжнє ім’я — Жан-Батист Поклен.'],['Мольєр був і актором, і драматургом.',true,'Він грав головні ролі у своїх комедіях.'],['«Міщанин-шляхтич» — комедія-балет.',true,'Музику написав Люллі.'],['Мольєр працював в Англії.',false,'Він працював у Франції.']]}]);
+MORE[17]=[['Яке справжнє ім’я Мольєра?',['Жан-Батист Поклен','П’єр Корнель','Жан Расін'],'Мольєр — сценічний псевдонім.'],['Як називалася перша трупа Мольєра?',['«Блискучий театр»','«Глобус»','«Березіль»'],'Створена 1643 року.'],['Скільки років Мольєр мандрував провінцією?',['Близько 13','2','40'],'1645–1658 роки.'],['Що таке комедія-балет?',['Вистава з драмою, музикою і танцями','Балет без музики','Трагедія'],'Жанр, створений Мольєром.'],['Кого висміює «Тартюф»?',['Лицеміра','Скупого','Хворого'],'Тартюф удає святого.'],['Як звати героя «Скупого»?',['Гарпагон','Тартюф','Журден'],'Гарпагон понад усе любить гроші.'],['Під час якої вистави Мольєру стало зле?',['«Уявний хворий»','«Тартюф»','«Мізантроп»'],'Він помер після четвертої вистави.'],['Хто написав музику до «Міщанина-шляхтича»?',['Жан-Батист Люллі','Моцарт','Бах'],'Придворний композитор Людовіка XIV.']];
+GOALS[17]=['розповідати про життя і творчість Мольєра','називати комедії Мольєра та їхніх героїв','пояснювати, що таке комедія-балет'];
+LWORDS[17]=[['МОЛЬЄР','Засновник класичної комедії'],['ТАРТЮФ','Лицемір із комедії Мольєра'],['ГАРПАГОН','Скупий герой'],['ЛЮЛЛІ','Композитор комедій-балетів'],['ПОКЛЕН','Справжнє прізвище Мольєра'],['ПАРИЖ','Місто, де народився Мольєр'],['ЖУРДЕН','Міщанин, що хотів стати шляхтичем']];
+
+L(18,'Мандрівна трупа і трупа публічного театру',
+`<div class="def"><b>Трупа</b> — колектив акторів одного театру. <b>Мандрівна трупа</b> переїжджає з міста в місто; <b>трупа публічного театру</b> має <b>постійну сцену</b>, на яку приходить будь-який глядач, що купив квиток.</div>
+<table class="tbl"><tr><th></th><th>Мандрівна трупа</th><th>Трупа публічного театру</th></tr>
+<tr><td>Сцена</td><td>Площі, заїжджі двори, зали замків</td><td>Постійна будівля театру</td></tr>
+<tr><td>Глядач</td><td>Щоразу новий</td><td>Постійний, міський</td></tr>
+<tr><td>Репертуар</td><td>Невеликий, перевірені вистави</td><td>Великий, часті прем’єри</td></tr>
+<tr><td>Життя акторів</td><td>Нестабільне, бідне</td><td>Стабільніше, підтримка мецената чи короля</td></tr></table>
+<div class="rules"><div class="rule"><h4>🧳 Мольєр у мандрах</h4>13 років подорожей навчили його розуміти простого глядача.</div><div class="rule"><h4>🏛️ Пале-Рояль</h4>Паризька сцена, яку король віддав трупі Мольєра.</div><div class="rule"><h4>🎟️ Комеді Франсез</h4>У 1680 р., після смерті Мольєра, його трупу об’єднали з іншою — так виник театр, який називають «Домом Мольєра».</div></div>`,
+[{type:'sort',title:'Мандрівна чи постійна трупа?',buckets:['Мандрівна','Публічного театру'],items:[['Грає на заїжджих дворах',0],['Має власну будівлю',1],['Щоразу новий глядач',0],['Часті прем’єри',1],['Невеликий репертуар',0],['Постійний міський глядач',1]]},
+{type:'flip',title:'Терміни',cards:[['Трупа','Колектив акторів'],['Репертуар','Перелік вистав театру'],['Прем’єра','Перша вистава нової постановки'],['Меценат','Покровитель, що фінансує мистецтво'],['Пале-Рояль','Сцена трупи Мольєра в Парижі'],['Комеді Франсез','«Дім Мольєра», заснований 1680 р.']]},
+{type:'quiz',qs:[{q:'Чому «Комеді Франсез» називають «Домом Мольєра»?',o:['Він виник із трупи Мольєра','Мольєр його збудував власноруч','Там жив Мольєр'],a:0,e:'Трупу Мольєра об’єднали з іншою в 1680 р.'},{q:'Що таке репертуар?',o:['Перелік вистав театру','Каса театру','Гримерна'],a:0,e:'Репертуар оновлюють прем’єрами.'}]}]);
+MORE[18]=[['Що таке трупа?',['Колектив акторів','Будівля театру','Костюм'],'Акторський колектив.'],['Де грала мандрівна трупа?',['На площах і заїжджих дворах','Лише у власному театрі','На телебаченні'],'Сцену ставили будь-де.'],['Що таке прем’єра?',['Перша вистава нової постановки','Остання вистава','Репетиція'],'Від франц. «перша».'],['Хто такий меценат?',['Покровитель мистецтва','Глядач без квитка','Суфлер'],'Він фінансує митців.'],['Яку сцену отримала трупа Мольєра в Парижі?',['Пале-Рояль','Глобус','Ла Скала'],'Її дав король.'],['Коли засновано «Комеді Франсез»?',['У 1680 році','У 1580 році','У 1880 році'],'Після смерті Мольєра.'],['Чим відрізняється публічний театр?',['Будь-хто може прийти за квитком','Грає лише для короля','Не має сцени'],'Він відкритий для міського глядача.'],['Чого навчили Мольєра мандри?',['Розуміти простого глядача','Співати оперу','Будувати театри'],'Він бачив життя різних людей.']];
+GOALS[18]=['розрізняти мандрівну трупу і трупу публічного театру','пояснювати терміни «репертуар», «прем’єра», «меценат»','розповідати історію трупи Мольєра'];
+LWORDS[18]=[['ТРУПА','Колектив акторів'],['РЕПЕРТУАР','Перелік вистав'],['МЕЦЕНАТ','Покровитель мистецтва'],['КВИТОК','Дає право увійти до зали'],['КОРОЛЬ','Людовік XIV — покровитель трупи Мольєра'],['ГАСТРОЛІ','Виступи трупи в інших містах'],['АФІША','Оголошення про виставу']];
+
+L(19,'Втрата інтересу глядача до театру класицизму',
+`<div class="def">З часом театр класицизму почав <b>втрачати глядача</b>: суворі правила, <b>штучна декламація</b> і героїв, які діяли лише за <b>обов’язком</b>, а не за <b>почуттями</b>, робили вистави <b>холодними</b> й далекими від життя.</div>
+<div class="rules"><div class="rule"><h4>🗿 Застиглі пози</h4>Актори стояли урочисто, жести були умовними, мова — співучою декламацією.</div><div class="rule"><h4>👑 Далекі герої</h4>Царі й міфічні герої — не схожі на звичайних глядачів.</div><div class="rule"><h4>📏 Тиск правил</h4>Три єдності обмежували сюжет і правдоподібність.</div><div class="rule"><h4>💭 Брак переживань</h4>Почуття «програвали» обов’язку — глядач не співпереживав.</div></div>
+<div class="scheme"><span>Суворі правила</span><em>+</em><span>Штучна гра</span><em>+</em><span>Немає людських переживань</span><em>→</em><span>Глядач нудьгує</span><em>→</em><span>Пошук нового: сентименталізм</span></div>
+${ex('Глядач XVIII ст. хотів бачити на сцені людей, схожих на себе, — з їхніми радощами й сльозами.')}`,
+[{type:'tf',items:[['Актори класицизму грали природно, як у житті.',false,'Гра була урочистою й умовною.'],['Герої трагедій класицизму були близькими звичайним глядачам.',false,'Це були царі й міфічні герої.'],['Правило трьох єдностей обмежувало сюжет.',true,'Дія мала відбуватися в одному місці за добу.'],['Глядачі хотіли бачити на сцені живі почуття.',true,'Так з’явився сентименталізм.']]},
+{type:'order',title:'Ланцюжок причин і наслідків',items:['Суворі правила класицизму','Штучна, урочиста гра','Брак людських переживань на сцені','Глядач втрачає інтерес','Пошук нового напряму — сентименталізму']},
+{type:'quiz',qs:[{q:'Чому вистави класицизму здавалися холодними?',o:['Почуття поступалися обов’язку, гра була штучною','Бо в театрах не було опалення','Бо там не було акторів'],a:0,e:'Глядач не міг співпереживати.'},{q:'Що прийшло на зміну класицизму в театрі?',o:['Сентименталізм','Античність','Відродження'],a:0,e:'Сентименталізм поставив у центр почуття.'}]}]);
+MORE[19]=[['Чому глядачі втрачали інтерес до класицизму?',['Брак людських переживань на сцені','Дорогі квитки','Погана погода'],'Гра була холодною.'],['Якою була манера гри акторів класицизму?',['Урочистою, умовною','Природною, побутовою','Без слів'],'Співуча декламація, застиглі пози.'],['Хто були герої класицистичних трагедій?',['Царі й міфічні герої','Селяни','Діти'],'Далекі від звичайних людей.'],['Що обмежувало сюжети класицизму?',['Правило трьох єдностей','Цензура кіно','Брак паперу'],'Місце, час, дія.'],['Чого хотів глядач XVIII ст.?',['Бачити людей, схожих на себе','Лише трагедій','Лише балетів'],'З почуттями та сльозами.'],['Що таке декламація?',['Виразне, урочисте читання тексту','Танець','Пантоміма'],'Актори співуче читали вірші.'],['Який напрям прийшов на зміну?',['Сентименталізм','Бароко','Модернізм'],'Театр почуттів.'],['Що «програвало» обов’язку в трагедіях?',['Почуття','Закон','Король'],'Тому глядач не співпереживав.']];
+GOALS[19]=['пояснювати причини втрати інтересу до театру класицизму','характеризувати манеру гри акторів класицизму','пояснювати передумови появи сентименталізму'];
+LWORDS[19]=[['ДЕКЛАМАЦІЯ','Урочисте читання тексту'],['ПОЗА','Застигле положення тіла'],['ПРАВИЛО','Норма, обов’язкова для автора'],['ПОЧУТТЯ','Чого бракувало на сцені класицизму'],['ГЛЯДАЧ','Той, хто втратив інтерес'],['НУДЬГА','Стан глядача на холодній виставі'],['ЖЕСТ','Рух руки актора']];
+
+/* ===== Модуль 6: Сентименталізм ===== */
+L(20,'Сентименталізм як спроба наблизити театр до реальної дійсності',
+`<div class="def"><b>Сентименталізм</b> (друга половина XVIII ст.) — напрям, який поставив у центр <b>почуття</b> людини. Театр звернувся до <b>звичайного життя</b>, <b>родини</b>, <b>простих людей</b>, щоб глядач упізнав на сцені себе.</div>
+<div class="rules"><div class="rule"><h4>💗 Почуття понад розум</h4>Головне — щире переживання, співчуття, доброта.</div><div class="rule"><h4>🏠 Побут і родина</h4>Дія відбувається у звичайних домах, а не в палацах.</div><div class="rule"><h4>🧑‍🌾 Простий герой</h4>Міщани, селяни, бідні, але доброчесні люди.</div><div class="rule"><h4>🗣️ Проза</h4>Замість урочистих віршів — природна мова.</div></div>
+<table class="tbl"><tr><th>Автор</th><th>Внесок</th></tr><tr><td>Дені Дідро (Франція)</td><td>Теорія «міщанської драми» — серйозної п’єси про звичайних людей</td></tr><tr><td>Готгольд Ефраїм Лессінг (Німеччина)</td><td>Міщанська трагедія «Міс Сара Сампсон», «Емілія Галотті»</td></tr><tr><td>Іван Котляревський (Україна)</td><td>«Наталка Полтавка» (1819) — п’єса з сентиментальними рисами</td></tr></table>`,
+[{type:'sort',title:'Класицизм чи сентименталізм?',buckets:['Класицизм','Сентименталізм'],items:[['Герой-цар',0],['Простий міщанин',1],['Обов’язок понад почуття',0],['Почуття понад розум',1],['Урочисті вірші',0],['Природна прозова мова',1],['Дія в палаці',0],['Дія в звичайному домі',1]]},
+{type:'match',title:'Автор — внесок',pairs:[['Дені Дідро','Теорія «міщанської драми»'],['Лессінг','«Емілія Галотті»'],['Котляревський','«Наталка Полтавка»']]},
+{type:'quiz',qs:[{q:'Що ставить у центр сентименталізм?',o:['Почуття людини','Державний обов’язок','Правила трьох єдностей'],a:0,e:'Від франц. sentiment — почуття.'},{q:'Яку п’єсу Котляревського пов’язують із сентименталізмом?',o:['«Наталка Полтавка»','«Енеїда»','«Кайдашева сім’я»'],a:0,e:'П’єса 1819 року з сентиментальними рисами.'}]}]);
+MORE[20]=[['Що означає слово «сентименталізм»?',['Від франц. «почуття»','Від лат. «правило»','Від грец. «маска»'],'Sentiment — почуття.'],['Коли виник сентименталізм?',['У другій половині XVIII ст.','У V ст. до н. е.','У XX ст.'],'Після класицизму.'],['Хто герой сентиментальної п’єси?',['Проста доброчесна людина','Міфічний бог','Цар-завойовник'],'Міщани, селяни.'],['Де відбувається дія?',['У звичайному домі','У палаці','На Олімпі'],'Театр наблизився до побуту.'],['Хто розробив теорію «міщанської драми»?',['Дені Дідро','Мольєр','Шекспір'],'Французький філософ-просвітник.'],['Яка мова звучала в сентиментальних п’єсах?',['Природна, часто проза','Урочисті вірші','Латина'],'Ближча до життя.'],['Хто написав «Емілію Галотті»?',['Лессінг','Дідро','Котляревський'],'Німецький драматург.'],['Коли написано «Наталку Полтавку»?',['У 1819 році','У 1919 році','У 1719 році'],'Іван Котляревський.']];
+GOALS[20]=['пояснювати, що таке сентименталізм','порівнювати театр класицизму і сентименталізму','називати представників сентименталізму'];
+LWORDS[20]=[['СЕНТИМЕНТАЛІЗМ','Напрям почуттів'],['ДІДРО','Автор теорії міщанської драми'],['ЛЕССІНГ','Автор «Емілії Галотті»'],['НАТАЛКА','Героїня п’єси Котляревського'],['ПОБУТ','Звичайне повсякденне життя'],['РОДИНА','Тема сентиментальних п’єс'],['МІЩАНИН','Міський житель-герой']];
+
+L(21,'Вибір позитивного героя в театрі сентименталізму',
+`<div class="def"><b>Позитивний герой</b> сентименталізму — <b>проста, чесна, доброчесна</b> людина з <b>чутливим серцем</b>. Його сила — не в титулі чи владі, а в <b>моральних якостях</b>.</div>
+<div class="rules"><div class="rule"><h4>💖 Чутливість</h4>Герой глибоко переживає, співчуває, не соромиться сліз.</div><div class="rule"><h4>🤝 Доброчесність</h4>Чесність, вірність, працьовитість, щедрість.</div><div class="rule"><h4>🌿 Близькість до природи</h4>Простота сільського життя як ідеал.</div><div class="rule"><h4>⚖️ Протиставлення</h4>Доброчесна бідна людина проти бездушного багатія чи підступного аристократа.</div></div>
+${ex('Наталка з п’єси Котляревського — бідна, але чесна й вірна дівчина, яка обирає кохання, а не багатство.')}
+<table class="tbl"><tr><th>Позитивний герой</th><th>Його протилежність</th></tr><tr><td>Щирий, співчутливий</td><td>Холодний, байдужий</td></tr><tr><td>Чесний, вірний</td><td>Лицемірний, зрадливий</td></tr><tr><td>Цінує почуття</td><td>Цінує гроші й титули</td></tr></table>`,
+[{type:'sort',title:'Риси позитивного героя чи антигероя?',buckets:['Позитивний герой','Антигерой'],items:[['Чесність',0],['Лицемірство',1],['Співчуття',0],['Жадібність',1],['Вірність',0],['Байдужість',1]]},
+{type:'tf',items:[['Позитивний герой сентименталізму — завжди цар.',false,'Це проста доброчесна людина.'],['Чутливість — важлива риса героя.',true,'Він глибоко переживає.'],['Герой цінує гроші понад почуття.',false,'Навпаки, почуття — головне.'],['Наталка Полтавка — приклад позитивної героїні.',true,'Вона чесна і вірна.']]},
+{type:'fill',items:['Сила героя сентименталізму — в його {моральних якостях|титулі|багатстві}.','Наталка обирає {кохання|багатство|славу}.','Протилежність доброчесного героя — {бездушний|чесний|щедрий} багатій.']}]);
+MORE[21]=[['Хто позитивний герой сентименталізму?',['Проста, доброчесна людина','Жорстокий правитель','Міфічний бог'],'Сила — в моральних якостях.'],['Яка риса головна для героя?',['Чутливість','Байдужість','Хитрість'],'Він співчуває і переживає.'],['Що протиставляється доброчесному герою?',['Бездушний багатій','Природа','Тварини'],'Конфлікт моралі й корисливості.'],['Що обирає Наталка Полтавка?',['Кохання','Багатство','Славу'],'Вона вірна Петрові.'],['Як сентименталізм ставився до сліз?',['Як до ознаки чутливого серця','Як до слабкості','Як до заборони'],'Сльози — знак щирості.'],['Що є ідеалом для сентименталістів?',['Простота і близькість до природи','Розкіш палацу','Війна'],'Сільське життя як ідеал.'],['Хто такий антигерой?',['Персонаж із негативними рисами','Головний позитивний герой','Глядач'],'Протилежність герою.'],['Яка якість НЕ властива позитивному герою?',['Лицемірство','Вірність','Щедрість'],'Він щирий.']];
+GOALS[21]=['характеризувати позитивного героя сентименталізму','порівнювати героя й антигероя','наводити приклади з української драматургії'];
+LWORDS[21]=[['ГЕРОЙ','Головна дійова особа'],['ЧЕСНІСТЬ','Риса позитивного героя'],['ЧУТЛИВІСТЬ','Здатність глибоко переживати'],['ВІРНІСТЬ','Чеснота Наталки'],['СПІВЧУТТЯ','Уміння розділити чужий біль'],['АНТИГЕРОЙ','Персонаж із негативними рисами'],['ДОБРОТА','Головна чеснота']];
+
+L(22,'Сентиментальна комедія',
+`<div class="def"><b>Сентиментальна («сльозлива») комедія</b> — жанр XVIII ст., у якому <b>смішне</b> поєднується з <b>зворушливим</b>. Герої переживають випробування, але все закінчується <b>щасливо</b>, а доброчесність — <b>винагороджена</b>.</div>
+<div class="rules"><div class="rule"><h4>🙂😢 Сміх крізь сльози</h4>Глядач і сміється, і зворушено плаче.</div><div class="rule"><h4>🏆 Чеснота винагороджена</h4>Добрі герої отримують щастя, злі — виправляються або соромляться.</div><div class="rule"><h4>🎶 Пісні</h4>Часто в п’єсах звучать пісні, що передають почуття.</div><div class="rule"><h4>🏡 Звичайне життя</h4>Сімейні історії, кохання, бідність і багатство.</div></div>
+<table class="tbl"><tr><th>Класична комедія</th><th>Сентиментальна комедія</th></tr><tr><td>Висміює вади</td><td>Зворушує і повчає</td></tr><tr><td>Смішні персонажі-«маски»</td><td>Живі люди з почуттями</td></tr><tr><td>Головне — сміх</td><td>Сміх + співчуття</td></tr></table>
+<div class="note">Французи називали цей жанр <b>«комедія сльозлива»</b>; одним із його творців був П’єр-Клод Нівель де Лашоссе.</div>`,
+[{type:'sort',title:'Класична чи сентиментальна комедія?',buckets:['Класична','Сентиментальна'],items:[['Висміює вади',0],['Зворушує глядача',1],['Персонажі-маски',0],['Живі почуття героїв',1],['Головне — сміх',0],['Сміх крізь сльози',1]]},
+{type:'memory',title:'Пам’ять: сентиментальна комедія',pairs:[['Сльозлива комедія','Інша назва жанру'],['Щасливий фінал','Чеснота винагороджена'],['Пісня','Передає почуття героя'],['Лашоссе','Один із творців жанру'],['Співчуття','Те, що відчуває глядач'],['Родина','Часта тема п’єс']]},
+{type:'quiz',qs:[{q:'Чим закінчується сентиментальна комедія?',o:['Щасливо','Загибеллю героя','Нічим'],a:0,e:'Доброчесність винагороджена.'},{q:'Що поєднує сентиментальна комедія?',o:['Смішне і зворушливе','Трагедію і балет','Цирк і оперу'],a:0,e:'Сміх крізь сльози.'}]}]);
+MORE[22]=[['Як інакше називають сентиментальну комедію?',['Сльозлива комедія','Висока трагедія','Комедія масок'],'Від франц. comédie larmoyante.'],['Що відбувається з доброчесністю у фіналі?',['Її винагороджено','Її покарано','Про неї забувають'],'Щасливий кінець.'],['Що відчуває глядач?',['І сміх, і співчуття','Лише страх','Лише нудьгу'],'Сміх крізь сльози.'],['Що часто звучить у сентиментальних комедіях?',['Пісні','Гарматні постріли','Тиша'],'Пісні передають почуття.'],['Хто один із творців жанру у Франції?',['Нівель де Лашоссе','Мольєр','Расін'],'XVIII століття.'],['Чим вона відрізняється від класичної комедії?',['Зворушує, а не лише висміює','Не має героїв','Триває добу'],'Живі почуття героїв.'],['Які теми типові для жанру?',['Родина, кохання','Війна богів','Космос'],'Звичайне життя.'],['Які персонажі в класичній комедії?',['Персонажі-маски','Живі почуття','Тільки діти'],'Типові вади в образах.']];
+GOALS[22]=['пояснювати особливості сентиментальної комедії','порівнювати класичну і сентиментальну комедію','пояснювати вислів «сміх крізь сльози»'];
+LWORDS[22]=[['КОМЕДІЯ','Жанр, що поєднує сміх і зворушення'],['СЛЬОЗИ','Знак щирих почуттів'],['ФІНАЛ','Завершення п’єси'],['ПІСНЯ','Передає почуття героя'],['ЧЕСНОТА','Те, що винагороджується'],['ЛАШОССЕ','Творець сльозливої комедії'],['СМІХ','Реакція глядача на комічне']];
+
+L(23,'Емоційна взаємодія глядачів та акторів',
+`<div class="def">У театрі сентименталізму глядач став <b>співпереживати</b>: він <b>плакав</b>, <b>сміявся</b>, <b>аплодував</b> разом з усією залою. Між сценою і залом виникала <b>емоційна взаємодія</b> — актор живе почуттями, глядач їх розділяє.</div>
+<div class="scheme"><span>Актор переживає роль</span><em>⇄</em><span>Глядач співпереживає</span><em>⇄</em><span>Реакція зали надихає актора</span></div>
+<div class="rules"><div class="rule"><h4>👏 Оплески</h4>Схвалення гри; «браво» — найвища похвала.</div><div class="rule"><h4>😢 Сльози в залі</h4>Ознака успіху сентиментальної вистави.</div><div class="rule"><h4>🔁 Виклик на «біс»</h4>Прохання повторити номер чи пісню.</div><div class="rule"><h4>💐 Квіти</h4>Подяка акторам після вистави.</div></div>
+<div class="note"><b>Театральний етикет:</b> приходити вчасно, вимикати телефон, не розмовляти під час дії, аплодувати наприкінці дії чи після вдалої сцени.</div>
+${ex('Справжній театр починається тоді, коли глядач забуває, що він у театрі.')}`,
+[{type:'flip',title:'Реакції глядачів',cards:[['Браво!','Найвища похвала акторові'],['Біс!','Прохання повторити'],['Оплески','Схвалення гри'],['Овація','Довгі гучні оплески стоячи'],['Аншлаг','Усі квитки продано'],['Антракт','Перерва між діями']]},
+{type:'tf',items:[['Під час вистави можна голосно розмовляти.',false,'Це заважає акторам і глядачам.'],['«Біс» означає прохання повторити.',true,'Від лат. bis — «двічі».'],['Реакція зали впливає на гру актора.',true,'Взаємодія двостороння.'],['Аншлаг — це порожня зала.',false,'Аншлаг — усі квитки продано.']]},
+{type:'quiz',qs:[{q:'Що таке співпереживання?',o:['Уміння відчувати разом із героєм','Байдужість','Сон у театрі'],a:0,e:'Основа емоційної взаємодії.'},{q:'Що таке антракт?',o:['Перерва між діями','Квиток','Завіса'],a:0,e:'Під час антракту можна вийти з зали.'}]}]);
+MORE[23]=[['Що таке емоційна взаємодія в театрі?',['Обмін почуттями між сценою і залом','Продаж квитків','Будівництво декорацій'],'Актор і глядач впливають одне на одного.'],['Що означає «браво»?',['Найвища похвала','Прохання тиші','Вимогу піти'],'Схвалення гри актора.'],['Що таке овація?',['Довгі гучні оплески','Перерва','Вихід актора'],'Часто стоячи.'],['Що означає «аншлаг»?',['Усі квитки продано','Вистава скасована','Нова вистава'],'Повна зала.'],['Як поводитися під час вистави?',['Тихо, з вимкненим телефоном','Голосно коментувати','Їсти й шуміти'],'Театральний етикет.'],['Що таке антракт?',['Перерва між діями','Кінець вистави','Завіса'],'Час відпочинку.'],['Як реагували глядачі на сентиментальні п’єси?',['Співпереживали, плакали','Спали','Йшли з зали'],'Сльози — ознака успіху.'],['Від якого слова «біс»?',['Лат. bis — «двічі»','Грец. «маска»','Англ. «бій»'],'Прохання повторити.']];
+GOALS[23]=['пояснювати, що таке емоційна взаємодія сцени й зали','знати театральний етикет','пояснювати театральні терміни: браво, біс, антракт, аншлаг'];
+LWORDS[23]=[['БРАВО','Найвища похвала актору'],['ОВАЦІЯ','Довгі гучні оплески'],['АНШЛАГ','Усі квитки продано'],['АНТРАКТ','Перерва між діями'],['ОПЛЕСКИ','Схвалення гри'],['ЕТИКЕТ','Правила поведінки'],['СПІВПЕРЕЖИВАННЯ','Уміння відчувати разом із героєм']];
+
+/* ===== Модуль 7: Романтизм ===== */
+L(24,'Романтизм як подолання безжиттєвості класицизму',
+`<div class="def"><b>Романтизм</b> (кінець XVIII — перша половина XIX ст.) відкинув холодні правила класицизму. Його театр — це <b>героїчний пафос</b>, <b>емоційне піднесення</b>, <b>сильні й глибокі почуття</b>, <b>свобода</b> творчості.</div>
+<table class="tbl"><tr><th>Класицизм</th><th>Романтизм</th></tr>
+<tr><td>Розум, правила</td><td>Почуття, свобода, фантазія</td></tr>
+<tr><td>Три єдності</td><td>Дія мандрує країнами й роками</td></tr>
+<tr><td>Обов’язок перемагає</td><td>Бунт особистості проти несправедливого світу</td></tr>
+<tr><td>Строгі жанри</td><td>Змішування трагічного й комічного</td></tr></table>
+<div class="rules"><div class="rule"><h4>🇩🇪 Фрідріх Шиллер</h4>«Розбійники», «Підступність і кохання», «Вільгельм Телль».</div><div class="rule"><h4>🇫🇷 Віктор Гюго</h4>Драма «Ернані» (1830): прем’єра стала «битвою» прихильників романтизму з класицистами.</div><div class="rule"><h4>🇬🇧 Джордж Байрон</h4>Драматичні поеми «Манфред», «Каїн».</div><div class="rule"><h4>🇺🇦 Україна</h4>Романтичні драми Тараса Шевченка («Назар Стодоля»).</div></div>
+<div class="note"><b>Романтичний герой</b> — виняткова, бунтівна, самотня особистість, що протистоїть світові.</div>`,
+[{type:'sort',title:'Класицизм чи романтизм?',buckets:['Класицизм','Романтизм'],items:[['Правило трьох єдностей',0],['Свобода фантазії',1],['Обов’язок перемагає почуття',0],['Бунт особистості',1],['Строгі жанри',0],['Змішування трагічного й комічного',1]]},
+{type:'match',title:'Автор — твір',pairs:[['Шиллер','«Розбійники»'],['Гюго','«Ернані»'],['Байрон','«Манфред»'],['Шевченко','«Назар Стодоля»']]},
+{type:'tf',items:[['Романтизм дотримувався правила трьох єдностей.',false,'Романтики відкинули правила класицизму.'],['Прем’єру «Ернані» називають «битвою».',true,'Прихильники і противники романтизму сперечалися в залі.'],['Романтичний герой — бунтівна особистість.',true,'Він протистоїть несправедливому світу.'],['Романтизм цінував почуття і свободу.',true,'Це його головні ідеї.']]}]);
+MORE[24]=[['Що відкинув романтизм?',['Холодні правила класицизму','Почуття','Музику'],'Свобода творчості понад правила.'],['Коли розквітнув романтизм?',['Кінець XVIII — перша половина XIX ст.','V ст. до н. е.','XVI ст.'],'Після класицизму і сентименталізму.'],['Хто автор «Розбійників»?',['Фрідріх Шиллер','Віктор Гюго','Мольєр'],'Німецький поет і драматург.'],['Чим уславилася прем’єра «Ернані» (1830)?',['«Битвою» в залі між прихильниками й противниками','Пожежею','Відсутністю глядачів'],'Перемога романтизму у Франції.'],['Який герой романтизму?',['Винятковий, бунтівний, самотній','Слухняний підданий','Простий веселий слуга'],'Він протистоїть світові.'],['Яку романтичну драму написав Тарас Шевченко?',['«Назар Стодоля»','«Наталка Полтавка»','«Гамлет»'],'Драма про кохання і честь.'],['Що таке пафос?',['Піднесений емоційний настрій','Декорація','Різновид маски'],'Героїчний пафос — ознака романтизму.'],['Що романтики дозволяли собі змішувати?',['Трагічне і комічне','Акторів і глядачів','Ніч і день'],'Без строгих меж жанрів.']];
+GOALS[24]=['пояснювати, чим романтизм відрізняється від класицизму','називати романтичних драматургів','характеризувати романтичного героя'];
+LWORDS[24]=[['РОМАНТИЗМ','Напрям свободи й почуттів'],['ШИЛЛЕР','Автор «Розбійників»'],['ГЮГО','Автор «Ернані»'],['БАЙРОН','Автор «Манфреда»'],['ПАФОС','Піднесений емоційний настрій'],['БУНТ','Протест героя проти світу'],['СВОБОДА','Головна цінність романтиків']];
+
+L(25,'Типи акторських ролей (амплуа)',
+`<div class="def"><b>Амплуа</b> — тип ролей, які найкраще пасують акторові за його <b>зовнішністю</b>, <b>голосом</b> і <b>темпераментом</b>. У театрі XIX ст. трупу складали саме за амплуа.</div>
+<table class="tbl"><tr><th>Амплуа</th><th>Що грає</th></tr>
+<tr><td><b>Герой / героїня</b></td><td>Головні сильні, благородні персонажі</td></tr>
+<tr><td><b>Коханець</b></td><td>Молодий закоханий юнак</td></tr>
+<tr><td><b>Інженю</b></td><td>Наївна, щира молода дівчина</td></tr>
+<tr><td><b>Лиходій</b></td><td>Підступний злодій, антагоніст</td></tr>
+<tr><td><b>Резонер</b></td><td>Розважливий персонаж, що повчає і оцінює події</td></tr>
+<tr><td><b>Комік</b></td><td>Смішний, кумедний персонаж</td></tr>
+<tr><td><b>Субретка</b></td><td>Жвава, хитра служниця</td></tr>
+<tr><td><b>Травесті</b></td><td>Актриса, що грає хлопчиків і підлітків</td></tr></table>
+<div class="note">Сучасний театр відходить від жорсткого поділу: добрий актор уміє грати <b>різні</b> ролі.</div>`,
+[{type:'match',title:'Амплуа — опис',pairs:[['Інженю','Наївна щира дівчина'],['Резонер','Повчає й оцінює події'],['Субретка','Жвава хитра служниця'],['Травесті','Актриса в ролі хлопчика'],['Лиходій','Підступний антагоніст'],['Комік','Кумедний персонаж']]},
+{type:'flip',title:'Згадайте амплуа',cards:[['Герой','Сильний, благородний головний персонаж'],['Коханець','Молодий закоханий юнак'],['Інженю','Наївна молода дівчина'],['Резонер','Розважливий «голос розуму»'],['Субретка','Спритна служниця'],['Травесті','Актриса в ролях підлітків']]},
+{type:'cross',title:'Кросворд «Амплуа»',words:[['ІНЖЕНЮ','Наївна молода дівчина'],['РЕЗОНЕР','Персонаж, що повчає'],['СУБРЕТКА','Хитра служниця'],['ТРАВЕСТІ','Актриса в ролі хлопчика'],['ЛИХОДІЙ','Підступний злодій'],['КОМІК','Кумедний персонаж'],['АМПЛУА','Тип ролей актора']]}]);
+MORE[25]=[['Що таке амплуа?',['Тип ролей, що пасують акторові','Костюм актора','Частина сцени'],'Залежить від зовнішності й темпераменту.'],['Хто така інженю?',['Наївна, щира молода дівчина','Злодійка','Стара служниця'],'Від франц. «простодушна».'],['Хто такий резонер?',['Персонаж, що повчає й оцінює події','Комік','Лиходій'],'«Голос розуму» в п’єсі.'],['Хто така субретка?',['Жвава хитра служниця','Королева','Богиня'],'Часто допомагає закоханим.'],['Що означає амплуа «травесті»?',['Актриса грає хлопчиків','Актор грає старих','Мовчазна роль'],'Ролі підлітків.'],['Як називали підступного злодія?',['Лиходій','Інженю','Резонер'],'Антагоніст героя.'],['За чим складали трупу в XIX ст.?',['За амплуа','За віком глядачів','За кольором волосся'],'Кожне амплуа мало свого актора.'],['Як ставиться до амплуа сучасний театр?',['Відходить від жорсткого поділу','Лише за амплуа','Забороняє ролі'],'Актор грає різні ролі.']];
+GOALS[25]=['пояснювати, що таке амплуа','називати основні амплуа акторів','визначати амплуа персонажів відомих п’єс'];
+LWORDS[25]=[['АМПЛУА','Тип ролей актора'],['ІНЖЕНЮ','Наївна молода дівчина'],['РЕЗОНЕР','Персонаж, що повчає'],['СУБРЕТКА','Хитра служниця'],['ТРАВЕСТІ','Актриса в ролях хлопчиків'],['ЛИХОДІЙ','Підступний антагоніст'],['КОМІК','Кумедний персонаж']];
+
+L(26,'Глядач епохи романтизму: співпереживання як основна функція',
+`<div class="def">Глядач романтизму прийшов у театр не по повчання, а по <b>сильні враження</b>. Його головна функція — <b>співпереживання</b>: разом із героєм він <b>захоплюється</b>, <b>страждає</b>, <b>обурюється</b> несправедливістю.</div>
+<div class="rules"><div class="rule"><h4>🔥 Пристрасть</h4>Глядач чекав від актора бурхливих емоцій і щирості.</div><div class="rule"><h4>⭐ Кумири</h4>Публіка обожнювала акторів-«зірок»: Едмунда Кіна (Англія), Фредерика Леметра (Франція).</div><div class="rule"><h4>🗣️ Активна зала</h4>Глядачі гучно реагували, сперечалися, вигукували, кидали квіти.</div><div class="rule"><h4>🎟️ Новий глядач</h4>До театру приходили студенти, ремісники, молодь — не лише аристократи.</div></div>
+${ex('Дивитися, як грає Кін, — усе одно що читати Шекспіра при спалахах блискавки.','С. Т. Колрідж, англійський поет')}
+<div class="note"><b>Катарсис</b> — очищення через співпереживання (термін Аристотеля): глядач виходить із театру зміненим.</div>`,
+[{type:'tf',items:[['Глядач романтизму приходив по сильні враження.',true,'Він чекав пристрасті й емоцій.'],['Зала епохи романтизму завжди мовчала.',false,'Глядачі бурхливо реагували.'],['Едмунд Кін — знаменитий актор-романтик.',true,'Англійська «зірка» XIX ст.'],['Катарсис означає нудьгу.',false,'Катарсис — очищення через співпереживання.']]},
+{type:'match',title:'Поняття — значення',pairs:[['Співпереживання','Відчувати разом із героєм'],['Катарсис','Очищення через переживання'],['Кумир','Обожнюваний актор'],['Пристрасть','Сильне бурхливе почуття']]},
+{type:'quiz',qs:[{q:'Хто ввів поняття «катарсис»?',o:['Аристотель','Шекспір','Гюго'],a:0,e:'Давньогрецький філософ.'},{q:'Хто такий Фредерик Леметр?',o:['Французький актор-романтик','Драматург класицизму','Японський актор'],a:0,e:'Кумир паризької публіки.'}]}]);
+MORE[26]=[['Яка головна функція глядача романтизму?',['Співпереживання','Критика правил','Сон'],'Він живе почуттями героя.'],['Чого чекав глядач від актора?',['Пристрасті й щирості','Холодної декламації','Мовчання'],'Сильних емоцій.'],['Хто такий Едмунд Кін?',['Англійський актор-романтик','Французький драматург','Римський комедіограф'],'«Зірка» лондонської сцени.'],['Що таке катарсис?',['Очищення через співпереживання','Різновид декорації','Головний герой'],'Термін Аристотеля.'],['Як реагувала зала романтизму?',['Бурхливо: вигуки, квіти, суперечки','Мовчки','Глядачів не було'],'Активна публіка.'],['Хто з’явився серед глядачів?',['Студенти, ремісники, молодь','Лише королі','Лише діти'],'Демократичний глядач.'],['Хто такий кумир?',['Обожнюваний актор','Суфлер','Квиток'],'Публіка обожнювала «зірок».'],['Що таке пристрасть?',['Сильне бурхливе почуття','Спокій','Правило'],'Пристрасть — серце романтизму.']];
+GOALS[26]=['пояснювати роль співпереживання у театрі романтизму','називати акторів-романтиків','пояснювати поняття «катарсис»'];
+LWORDS[26]=[['КАТАРСИС','Очищення через співпереживання'],['КІН','Англійський актор-романтик (Едмунд)'],['ЛЕМЕТР','Французький актор-романтик'],['КУМИР','Обожнюваний актор'],['ПРИСТРАСТЬ','Сильне бурхливе почуття'],['АРИСТОТЕЛЬ','Філософ, що ввів термін «катарсис»'],['ВРАЖЕННЯ','По що приходив глядач']];
+
+L(27,'Візуальні елементи театру романтизму: сценографія, грим, костюми',
+`<div class="def">Театр романтизму став <b>видовищним</b>: <b>мальовнича сценографія</b>, нове <b>освітлення</b>, виразний <b>сценічний грим</b> та <b>історично точні костюми</b> переносили глядача в інші країни й епохи.</div>
+<div class="rules"><div class="rule"><h4>🏞️ Сценографія</h4>Мальовані задники з бурями, руїнами замків, горами, місячними ночами.</div><div class="rule"><h4>💡 Освітлення</h4>Газові ліхтарі (з 1810-х) дозволили затемнювати залу й керувати світлом на сцені.</div><div class="rule"><h4>🎨 Грим</h4>Виразний, щоб передати характер героя: блідість, тіні, рум’янець.</div><div class="rule"><h4>👗 Костюми</h4>Історична точність: середньовічні лицарі, іспанські гранди, східні шати.</div></div>
+<table class="tbl"><tr><th>Термін</th><th>Значення</th></tr><tr><td>Сценографія</td><td>Мистецтво оформлення вистави</td></tr><tr><td>Задник</td><td>Великий мальований фон у глибині сцени</td></tr><tr><td>Куліси</td><td>Бічні частини оформлення, що ховають закуліся</td></tr><tr><td>Бутафорія</td><td>Несправжні предмети, що імітують справжні</td></tr><tr><td>Рампа</td><td>Ряд світильників уздовж краю сцени</td></tr></table>`,
+[{type:'match',title:'Термін — значення',pairs:[['Сценографія','Мистецтво оформлення вистави'],['Задник','Мальований фон у глибині сцени'],['Куліси','Бічні частини оформлення'],['Бутафорія','Несправжні предмети'],['Рампа','Світильники вздовж краю сцени'],['Грим','Зміна обличчя актора']]},
+{type:'sort',title:'Що це: світло, грим чи декорація?',buckets:['Світло','Грим','Декорація'],items:[['Газові ліхтарі',0],['Рампа',0],['Тіні під очима',1],['Рум’янець',1],['Задник із горами',2],['Руїни замку на полотні',2]]},
+{type:'quiz',qs:[{q:'Що дозволило затемнювати залу в XIX ст.?',o:['Газове освітлення','Свічки','Сонце'],a:0,e:'Газові ліхтарі з 1810-х років.'},{q:'Що таке бутафорія?',o:['Несправжні предмети на сцені','Справжня зброя','Музика'],a:0,e:'Наприклад, картонний меч.'}]}]);
+MORE[27]=[['Що таке сценографія?',['Мистецтво оформлення вистави','Наука про жести','Вид квитка'],'Декорації, світло, костюми.'],['Що таке задник?',['Мальований фон у глибині сцени','Задні ряди зали','Костюм'],'Великий розписаний фон.'],['Що зображали романтичні декорації?',['Бурі, руїни, гори, місячні ночі','Лише кімнати','Нічого'],'Мальовничі пейзажі.'],['Яке освітлення з’явилося на початку XIX ст.?',['Газове','Електричне LED','Лазерне'],'Газові ліхтарі.'],['Що таке рампа?',['Світильники вздовж краю сцени','Сходи','Каса'],'Освітлює акторів знизу.'],['Що таке бутафорія?',['Несправжні предмети, що імітують справжні','Справжні меблі','Музичні інструменти'],'Картонний меч, пластикові фрукти.'],['Якими були костюми романтизму?',['Історично точними','Сучасними','Однаковими для всіх'],'Переносили в інші епохи.'],['Що таке куліси?',['Бічні частини оформлення сцени','Квитки','Перерва'],'Ховають закуліся.']];
+GOALS[27]=['називати візуальні елементи театру романтизму','пояснювати терміни сценографії','пояснювати роль світла і гриму'];
+LWORDS[27]=[['СЦЕНОГРАФІЯ','Мистецтво оформлення вистави'],['ГРИМ','Зміна обличчя актора'],['КУЛІСИ','Бічні частини оформлення'],['РАМПА','Світильники вздовж краю сцени'],['ЗАДНИК','Мальований фон'],['БУТАФОРІЯ','Несправжні предмети'],['КОСТЮМ','Одяг персонажа']];
+
+/* ===== Модуль 8: Театр і суспільство ===== */
+L(28,'Трансформація театру як місця: від просто неба до функціональної будівлі',
+`<div class="def">Театр пройшов шлях від <b>вистав просто неба</b> до <b>спеціально обладнаної будівлі</b> зі <b>сценою-коробкою</b>, завісою, машинерією, освітленням і зручною глядацькою залою.</div>
+<div class="timeline"><div><b>Античність</b> — театри просто неба на схилах пагорбів.</div><div><b>Середньовіччя</b> — вистави на площах, біля храмів, на возах.</div><div><b>1585</b> — Театро Олімпіко у Віченці: один із перших критих театрів.</div><div><b>1599</b> — «Глобус»: дерев’яний, без даху над партером.</div><div><b>1618</b> — Театро Фарнезе в Пармі: сцена з порталом-рамою («сцена-коробка»).</div><div><b>XVIII–XIX ст.</b> — ярусні зали, оперні театри, газове, а згодом електричне світло.</div><div><b>XX–XXI ст.</b> — трансформовані зали, малі сцени, театри в незвичних просторах.</div></div>
+<div class="rules"><div class="rule"><h4>🖼️ Сцена-коробка</h4>Сцена за рамкою-порталом, як картина; глядач дивиться з одного боку.</div><div class="rule"><h4>⚙️ Машинерія</h4>Механізми для зміни декорацій, польотів, обертового круга.</div><div class="rule"><h4>🧯 Безпека</h4>Пожежна завіса, запасні виходи — після численних пожеж у театрах.</div></div>`,
+[{type:'order',title:'Шлях театральної будівлі',items:['Театр просто неба на схилі пагорба','Вистави на площах і возах','Театро Олімпіко (1585)','«Глобус» (1599)','Сцена-коробка Театро Фарнезе (1618)','Ярусні оперні театри XIX ст.']},
+{type:'flip',title:'Частини сучасного театру',cards:[['Портал','Рамка, що обрамлює сцену'],['Обертовий круг','Частина сцени, що обертається'],['Колосники','Ґратчасте перекриття над сценою для підвішування декорацій'],['Оркестрова яма','Місце для оркестру перед сценою'],['Пожежна завіса','Захищає залу від вогню'],['Фойє','Приміщення для глядачів перед залом']]},
+{type:'tf',items:[['Античні театри мали дах.',false,'Вони були просто неба.'],['Театро Олімпіко — один із перших критих театрів.',true,'Збудований у 1585 році.'],['Сцена-коробка обрамлена порталом.',true,'Глядач дивиться на неї, як на картину.'],['Пожежна завіса з’явилася через пожежі в театрах.',true,'Безпека глядачів стала важливою.']]}]);
+MORE[28]=[['Де грали античні вистави?',['Просто неба на схилах пагорбів','У критих залах','У замках'],'Театр під відкритим небом.'],['Що таке сцена-коробка?',['Сцена за рамкою-порталом','Ящик для ляльок','Каса'],'Глядач дивиться з одного боку.'],['Який театр 1618 року мав сцену з порталом?',['Театро Фарнезе','Глобус','Ла Скала'],'Розташований у Пармі.'],['Що таке машинерія?',['Механізми для зміни декорацій','Буфет','Глядацькі крісла'],'Дозволяє «польоти» й швидкі зміни.'],['Що таке обертовий круг?',['Частина сцени, що обертається','Танець','Квиток'],'Швидка зміна картин.'],['Для чого пожежна завіса?',['Захищає залу від вогню','Прикрашає сцену','Для реклами'],'Безпека глядачів.'],['Що таке фойє?',['Приміщення для глядачів перед залом','Задник','Гримерна'],'Там чекають початку вистави.'],['Де розташовувався оркестр в оперному театрі?',['В оркестровій ямі','На даху','У фойє'],'Перед сценою, нижче рівня зали.']];
+GOALS[28]=['описувати шлях театральної будівлі від античності до сьогодення','пояснювати, що таке сцена-коробка і машинерія','називати частини сучасного театру'];
+LWORDS[28]=[['ПОРТАЛ','Рамка, що обрамлює сцену'],['МАШИНЕРІЯ','Механізми сцени'],['ФОЙЄ','Приміщення перед залом'],['КОЛОСНИКИ','Перекриття над сценою'],['ПАРМА','Місто з Театро Фарнезе'],['ВІЧЕНЦА','Місто з Театро Олімпіко'],['ЗАВІСА','Відділяє сцену від зали']];
+
+L(29,'Ставлення до акторства в суспільстві в різні епохи',
+`<div class="def">Ставлення до акторів змінювалося: від <b>пошани</b> в Давній Греції до <b>зневаги</b> в Римі й Середньовіччі — і до <b>визнання</b> та <b>слави</b> в Новий час.</div>
+<table class="tbl"><tr><th>Епоха</th><th>Ставлення</th></tr>
+<tr><td>Давня Греція</td><td>Актори — шановані громадяни, учасники свята Діоніса</td></tr>
+<tr><td>Давній Рим</td><td>Часто раби; акторство вважали ганебним заняттям</td></tr>
+<tr><td>Середньовіччя</td><td>Церква засуджувала мандрівних акторів-гістріонів</td></tr>
+<tr><td>Відродження</td><td>Трупи під заступництвом знаті («Слуги лорда-камергера» — трупа Шекспіра)</td></tr>
+<tr><td>XVII ст.</td><td>Мольєра після смерті ховали вночі, бо церква не схвалювала акторів</td></tr>
+<tr><td>XIX–XXI ст.</td><td>Актори — «зірки», почесні звання, повага суспільства</td></tr></table>
+<div class="note">В Україні в XIX ст. <b>«театр корифеїв»</b> (Марко Кропивницький, Марія Заньковецька, Микола Садовський) зробив акторство справою національної гідності.</div>`,
+[{type:'sort',title:'Пошана чи зневага?',buckets:['Пошана','Зневага'],items:[['Актори Давньої Греції',0],['Актори-раби Риму',1],['Середньовічні гістріони в очах церкви',1],['«Зірки» XIX ст.',0],['Театр корифеїв',0]]},
+{type:'order',title:'Ставлення до акторів у часі',items:['Пошана в Давній Греції','Зневага в Давньому Римі','Засудження в Середньовіччі','Заступництво знаті у Відродженні','Слава «зірок» XIX ст.']},
+{type:'quiz',qs:[{q:'Хто такі «корифеї» українського театру?',o:['Кропивницький, Заньковецька, Садовський','Есхіл і Софокл','Мольєр і Расін'],a:0,e:'Засновники професійного українського театру XIX ст.'},{q:'Як називалася трупа Шекспіра?',o:['«Слуги лорда-камергера»','«Блискучий театр»','«Березіль»'],a:0,e:'Згодом — «Слуги короля».'}]}]);
+MORE[29]=[['Як ставилися до акторів у Давній Греції?',['З пошаною','Зневажали','Забороняли'],'Учасники свята Діоніса.'],['Хто часто був актором у Римі?',['Раби','Сенатори','Жерці'],'Акторство вважали ганебним.'],['Хто такі гістріони?',['Середньовічні мандрівні актори','Римські сенатори','Грецькі боги'],'Церква їх засуджувала.'],['Чому Мольєра поховали вночі?',['Церква не схвалювала акторів','Так було модно','Через війну'],'Король допоміг з похованням.'],['Хто такі корифеї українського театру?',['Кропивницький, Заньковецька, Садовський','Шекспір і Марлоу','Есхіл і Евріпід'],'Театр XIX ст.'],['Під чиїм заступництвом діяли трупи доби Відродження?',['Знаті','Церкви','Купців Індії'],'Наприклад, лорда-камергера.'],['Як ставляться до акторів сьогодні?',['З повагою, як до митців','Зневажають','Забороняють виступи'],'Почесні звання, слава.'],['Хто з корифеїв — велика актриса?',['Марія Заньковецька','Ідзумо-но Окуні','Коломбіна'],'На її честь названо театр у Львові.']];
+GOALS[29]=['пояснювати, як змінювалося ставлення до акторів','наводити приклади з різних епох','називати корифеїв українського театру'];
+LWORDS[29]=[['ГІСТРІОН','Середньовічний мандрівний актор'],['КОРИФЕЙ','Видатний діяч мистецтва'],['ЗАНЬКОВЕЦЬКА','Велика українська актриса'],['САДОВСЬКИЙ','Корифей, актор і режисер'],['КРОПИВНИЦЬКИЙ','Батько українського театру корифеїв'],['ПОШАНА','Ставлення до акторів у Греції'],['ЗІРКА','Знаменитий актор']];
+
+L(30,'Обмеження в театрі для жінок і дітей',
+`<div class="def">Століттями <b>жінкам заборонялося</b> грати на сцені, а інколи — й відвідувати театр як <b>глядачкам</b>. Для <b>дітей</b> довго не існувало окремого театру. Ці обмеження поступово зникли.</div>
+<table class="tbl"><tr><th>Де і коли</th><th>Обмеження</th></tr>
+<tr><td>Давня Греція</td><td>Усі ролі грали чоловіки; участь жінок як глядачок досі обговорюють історики</td></tr>
+<tr><td>Англія Шекспіра</td><td>Жіночі ролі грали юнаки; актриси вийшли на англійську сцену лише після 1660 р.</td></tr>
+<tr><td>Японія</td><td>1629 р. жінкам заборонили грати в Кабукі — з’явилися актори-<b>оннагата</b></td></tr>
+<tr><td>Італія</td><td>У комедії дель арте актриси грали вже в XVI ст. — виняток для Європи</td></tr></table>
+<div class="rules"><div class="rule"><h4>🧒 Діти в театрі</h4>Довго вистави не розраховували на дітей; виняток — вертеп і ярмаркові лялькові вистави.</div><div class="rule"><h4>🎈 Театр для дітей</h4>Перші професійні театри для дітей і юного глядача з’явилися на початку XX ст.</div></div>
+<div class="note">Сьогодні в Україні діють <b>театри ляльок</b> і <b>театри для дітей та юнацтва</b> в багатьох містах.</div>`,
+[{type:'tf',items:[['У театрі Шекспіра жіночі ролі грали актриси.',false,'Їх грали юнаки.'],['Актриси вийшли на англійську сцену після 1660 р.',true,'Після відновлення монархії.'],['У комедії дель арте вже в XVI ст. грали жінки.',true,'Це був виняток для Європи.'],['Театри для дітей існували в Давній Греції.',false,'Вони з’явилися на початку XX ст.']]},
+{type:'match',title:'Де — яке обмеження',pairs:[['Англія Шекспіра','Жіночі ролі грали юнаки'],['Японія, 1629 р.','Заборона жінкам грати в Кабукі'],['Давня Греція','Усі ролі грали чоловіки'],['Італія XVI ст.','Актриси вже грали — виняток']]},
+{type:'fill',items:['Чоловіків, які грають жіночі ролі в Кабукі, називають {оннагата|інженю|резонер}.','Актриси вийшли на англійську сцену після {1660|1160|1960} року.','Перші театри для дітей з’явилися на початку {XX|XV|X} ст.']}]);
+MORE[30]=[['Хто грав жіночі ролі в театрі Шекспіра?',['Юнаки','Актриси','Діти-дівчата'],'Жінкам грати не дозволяли.'],['Коли актриси вийшли на англійську сцену?',['Після 1660 р.','У 1599 р.','У V ст.'],'Після відновлення монархії.'],['Що сталося в Японії в 1629 р.?',['Жінкам заборонили грати в Кабукі','Збудували Глобус','Відкрили оперу'],'З’явилися оннагата.'],['Хто такі оннагата?',['Актори-чоловіки, що грають жінок у Кабукі','Японські глядачі','Ляльки'],'Окреме мистецтво.'],['Де актриси грали вже в XVI ст.?',['У комедії дель арте в Італії','У Глобусі','В античному Римі'],'Виняток для Європи.'],['Коли з’явилися перші театри для дітей?',['На початку XX ст.','В античності','У XVII ст.'],'Театри для юного глядача.'],['Які вистави дивилися діти раніше?',['Вертеп і лялькові вистави на ярмарках','Лише опери','Нічого'],'Народний театр був для всіх.'],['Які театри для дітей діють в Україні сьогодні?',['Театри ляльок і театри для дітей та юнацтва','Лише кінотеатри','Жодних'],'У багатьох містах.']];
+GOALS[30]=['пояснювати обмеження для жінок і дітей у театрі минулого','наводити приклади з різних країн','розповідати про сучасні театри для дітей'];
+LWORDS[30]=[['ОННАГАТА','Актор-чоловік у жіночій ролі в Кабукі'],['АКТРИСА','Жінка-актор'],['ЮНАКИ','Грали жіночі ролі в Англії'],['ЗАБОРОНА','Обмеження для жінок'],['ЛЯЛЬКИ','Театр, що здавна любили діти'],['ЮНАЦТВО','Юний глядач'],['ГЛЯДАЧКА','Жінка в залі']];
+
+L(31,'Розширення кола театральних професій',
+`<div class="def">Спочатку театр тримався на <b>драматургові</b> й <b>акторах</b>. Згодом з’явилися <b>режисер</b>, <b>художник-сценограф</b>, <b>композитор</b>, <b>хореограф</b> і десятки інших професій.</div>
+<table class="tbl"><tr><th>Професія</th><th>Що робить</th></tr>
+<tr><td><b>Драматург</b></td><td>Пише п’єсу</td></tr>
+<tr><td><b>Режисер</b></td><td>Створює виставу як ціле, працює з акторами (професія оформилася наприкінці XIX ст.)</td></tr>
+<tr><td><b>Художник-сценограф</b></td><td>Створює декорації та образ простору</td></tr>
+<tr><td><b>Композитор</b></td><td>Пише музику до вистави</td></tr>
+<tr><td><b>Хореограф</b></td><td>Ставить танці та пластику</td></tr>
+<tr><td><b>Художник по костюмах, гример</b></td><td>Створюють зовнішність персонажів</td></tr>
+<tr><td><b>Освітлювач, звукорежисер</b></td><td>Керують світлом і звуком</td></tr>
+<tr><td><b>Суфлер</b></td><td>Підказує акторам текст із будки біля сцени</td></tr>
+<tr><td><b>Бутафор, реквізитор</b></td><td>Виготовляють і подають предмети для вистави</td></tr></table>
+<div class="note">Українські режисери-реформатори: <b>Лесь Курбас</b>, <b>Гнат Юра</b>; у світі — <b>Костянтин Станіславський</b> (система роботи актора над роллю).</div>`,
+[{type:'match',title:'Професія — обов’язок',pairs:[['Драматург','Пише п’єсу'],['Режисер','Створює виставу як ціле'],['Сценограф','Створює декорації'],['Хореограф','Ставить танці'],['Суфлер','Підказує текст'],['Гример','Змінює обличчя актора']]},
+{type:'memory',title:'Пам’ять: хто є хто',pairs:[['Композитор','Музика вистави'],['Освітлювач','Світло на сцені'],['Бутафор','Несправжні предмети'],['Костюмер','Одяг персонажів'],['Звукорежисер','Звук і шуми'],['Режисер','Задум вистави']]},
+{type:'quiz',qs:[{q:'Коли оформилася професія режисера?',o:['Наприкінці XIX ст.','В античності','У XXI ст.'],a:0,e:'Раніше виставу ставили провідні актори чи автори.'},{q:'Хто такий суфлер?',o:['Підказує акторам текст','Продає квитки','Пише музику'],a:0,e:'Сидить у будці біля сцени.'}]}]);
+MORE[31]=[['Хто створює виставу як ціле?',['Режисер','Суфлер','Касир'],'Він — автор задуму вистави.'],['Хто пише п’єсу?',['Драматург','Хореограф','Освітлювач'],'Автор тексту.'],['Хто створює декорації?',['Художник-сценограф','Композитор','Суфлер'],'Образ простору вистави.'],['Хто ставить танці?',['Хореограф','Гример','Драматург'],'Пластика і танці.'],['Хто підказує акторам текст?',['Суфлер','Режисер','Бутафор'],'Із будки біля сцени.'],['Хто такий бутафор?',['Виготовляє несправжні предмети','Пише музику','Керує світлом'],'Бутафорія — предмети-імітації.'],['Хто з українських режисерів — реформатор?',['Лесь Курбас','Мольєр','Плавт'],'Засновник «Березоля».'],['Чия «система» стосується роботи актора над роллю?',['Костянтина Станіславського','Шекспіра','Аристофана'],'Відома в усьому світі.']];
+GOALS[31]=['називати театральні професії та їхні обов’язки','пояснювати роль режисера','називати відомих режисерів-реформаторів'];
+LWORDS[31]=[['РЕЖИСЕР','Створює виставу як ціле'],['ДРАМАТУРГ','Пише п’єсу'],['СУФЛЕР','Підказує текст'],['ХОРЕОГРАФ','Ставить танці'],['ГРИМЕР','Змінює обличчя актора'],['БУТАФОР','Виготовляє несправжні предмети'],['КОМПОЗИТОР','Пише музику']];
+
+/* ===== Модуль 9: Кабукі ===== */
+L(32,'Синтез співу, музики, танцю у театрі Кабукі',
+`<div class="def"><b>Кабукі</b> — традиційний японський театр, що виник у <b>1603 р.</b> Назва складається з трьох ієрогліфів: <b>ка</b> — спів, <b>бу</b> — танець, <b>кі</b> — майстерність. Це <b>синтез</b> драми, музики й танцю.</div>
+<div class="timeline"><div><b>1603</b> — танцівниця <b>Ідзумо-но Окуні</b> показує в Кіото перші вистави Кабукі.</div><div><b>1629</b> — жінкам заборонено виступати; ролі грають чоловіки.</div><div><b>XVIII ст.</b> — винайдено обертову сцену; розквіт Кабукі в Едо (Токіо).</div><div><b>2005</b> — ЮНЕСКО визнає Кабукі шедевром нематеріальної спадщини людства.</div></div>
+<div class="rules"><div class="rule"><h4>🌸 Ханаміті</h4>«Квітковий шлях» — поміст через залу, яким актори виходять до сцени.</div><div class="rule"><h4>🎨 Кумадорі</h4>Яскравий грим: <b>червоний</b> — сила й доброчесність, <b>синій</b> — лиходійство.</div><div class="rule"><h4>✋ Мі-е</h4>Ефектна застигла поза в кульмінаційний момент.</div><div class="rule"><h4>🎵 Музика</h4>Сямісен (струнний інструмент), барабани, флейти, спів.</div></div>`,
+[{type:'match',title:'Ієрогліф — значення',pairs:[['Ка','Спів'],['Бу','Танець'],['Кі','Майстерність']]},
+{type:'flip',title:'Мова Кабукі',cards:[['Ханаміті','«Квітковий шлях» через залу'],['Кумадорі','Яскравий символічний грим'],['Мі-е','Застигла ефектна поза'],['Сямісен','Японський струнний інструмент'],['Окуні','Засновниця Кабукі (1603)'],['Оннагата','Актор у жіночих ролях']]},
+{type:'tf',items:[['Кабукі виник у 1603 році.',true,'Його засновниця — Ідзумо-но Окуні.'],['Червоний грим означає лиходія.',false,'Червоний — сила й доброчесність; синій — лиходійство.'],['Ханаміті — поміст через залу.',true,'Ним актори виходять до сцени.'],['Кабукі визнано спадщиною ЮНЕСКО.',true,'У 2005 році.']]}]);
+MORE[32]=[['Що означає «ка» в слові Кабукі?',['Спів','Танець','Маска'],'Ка — спів, бу — танець, кі — майстерність.'],['Хто заснував Кабукі?',['Ідзумо-но Окуні','Шекспір','Мольєр'],'Танцівниця з Кіото.'],['Коли виник Кабукі?',['У 1603 році','У 1903 році','У 603 році'],'Початок епохи Едо.'],['Що таке ханаміті?',['Поміст через залу','Маска','Музичний інструмент'],'«Квітковий шлях».'],['Що означає синій колір гриму кумадорі?',['Лиходійство','Доброту','Кохання'],'Червоний — сила й доброчесність.'],['Що таке мі-е?',['Застигла ефектна поза','Танець з віялом','Квиток'],'У кульмінаційний момент.'],['Який інструмент звучить у Кабукі?',['Сямісен','Скрипка','Орган'],'Японський струнний інструмент.'],['Коли ЮНЕСКО визнало Кабукі шедевром спадщини?',['У 2005 році','У 1603 році','У 1950 році'],'Нематеріальна спадщина людства.']];
+GOALS[32]=['пояснювати значення назви «Кабукі»','називати елементи театру Кабукі','пояснювати символіку гриму кумадорі'];
+LWORDS[32]=[['КАБУКІ','Японський театр співу й танцю'],['ОКУНІ','Засновниця Кабукі'],['ХАНАМІТІ','«Квітковий шлях» через залу'],['КУМАДОРІ','Символічний грим'],['СЯМІСЕН','Японський струнний інструмент'],['КІОТО','Місто, де виник Кабукі'],['ТОКІО','Колишнє Едо — центр Кабукі']];
+
+L(33,'Дидактичне спрямування вистав Кабукі: «винагороджуйте доброчесних і карайте злих»',
+`<div class="def">Вистави Кабукі мали <b>виховну (дидактичну)</b> мету. Їхній принцип — <b>«канзен тьоаку»</b>: «<b>винагороджуйте доброчесних</b> і <b>карайте злих</b>».</div>
+<div class="rules"><div class="rule"><h4>⚖️ Добро і зло</h4>Герої чітко поділені: доброчесні — і лиходії; грим одразу показує, хто є хто.</div><div class="rule"><h4>🏯 Історичні п’єси (дзідаймоно)</h4>Про самураїв, вірність і честь.</div><div class="rule"><h4>🏘️ Побутові п’єси (севамоно)</h4>Про життя міщан, купців, ремісників.</div><div class="rule"><h4>💃 Танцювальні п’єси</h4>Ліричні, часто за мотивами легенд.</div></div>
+<table class="tbl"><tr><th>Чеснота</th><th>Як показана</th></tr><tr><td>Вірність</td><td>Слуга вірний своєму пану до кінця</td></tr><tr><td>Обов’язок (гірі)</td><td>Герой виконує обов’язок навіть ціною особистого щастя</td></tr><tr><td>Справедливість</td><td>Лиходій зрештою покараний</td></tr></table>
+<div class="note">Відомий сюжет — історія <b>47 вірних ронінів</b>, які помстилися за свого пана: приклад вірності й честі.</div>`,
+[{type:'sort',title:'Тип п’єси Кабукі',buckets:['Історична (дзідаймоно)','Побутова (севамоно)'],items:[['Про самураїв',0],['Про купців',1],['Про вірність пану',0],['Про ремісників',1],['Про давні битви',0],['Про міське життя',1]]},
+{type:'tf',items:[['Принцип Кабукі — «винагороджуйте доброчесних і карайте злих».',true,'Дидактична мета.'],['У Кабукі важко зрозуміти, хто лиходій.',false,'Грим одразу показує характер.'],['Гірі — це обов’язок.',true,'Герой виконує обов’язок ціною щастя.'],['Історія 47 ронінів — про зраду.',false,'Вона про вірність і честь.']]},
+{type:'quiz',qs:[{q:'Що означає «дидактичний»?',o:['Повчальний, виховний','Смішний','Музичний'],a:0,e:'Мета — виховувати глядача.'},{q:'Про що історія 47 ронінів?',o:['Про вірність і честь','Про кохання','Про подорож до моря'],a:0,e:'Роніни помстилися за свого пана.'}]}]);
+MORE[33]=[['Яка мета вистав Кабукі?',['Виховна (дидактична)','Лише розважальна','Рекламна'],'«Канзен тьоаку».'],['Що означає «канзен тьоаку»?',['Винагороджуйте доброчесних і карайте злих','Співайте й танцюйте','Мовчіть у залі'],'Головний принцип.'],['Що таке дзідаймоно?',['Історичні п’єси','Побутові п’єси','Танці'],'Про самураїв і честь.'],['Що таке севамоно?',['Побутові п’єси','Історичні п’єси','Маски'],'Про міщан і купців.'],['Що означає «гірі»?',['Обов’язок','Кохання','Помста'],'Важлива чеснота.'],['Як глядач упізнає лиходія?',['За гримом','За квитком','Ніяк'],'Синій грим кумадорі.'],['Про що історія 47 ронінів?',['Про вірність і честь','Про скупість','Про пригоди моряків'],'Відомий сюжет Кабукі.'],['Що чекає на лиходія у фіналі?',['Покарання','Нагорода','Слава'],'Справедливість перемагає.']];
+GOALS[33]=['пояснювати дидактичне спрямування Кабукі','розрізняти типи п’єс Кабукі','наводити приклади чеснот у виставах'];
+LWORDS[33]=[['ДИДАКТИКА','Повчальність, виховна мета'],['РОНІНИ','47 вірних воїнів без пана'],['САМУРАЙ','Японський воїн'],['ГІРІ','Обов’язок'],['ВІРНІСТЬ','Чеснота ронінів'],['ЛИХОДІЙ','Той, кого карають'],['ЧЕСТЬ','Головна цінність самурая']];
+
+L(34,'Підготовка акторів Кабукі',
+`<div class="def">Актор Кабукі навчається <b>з дитинства</b> і все життя. Окрім гри, він опановує <b>танець</b>, <b>вокал</b>, <b>чайну церемонію</b>, <b>ікебану</b> (складання квітів) і <b>каліграфію</b> — усе, що виховує витонченість рухів і смаку.</div>
+<div class="rules"><div class="rule"><h4>💃 Танець</h4>Традиційний японський танець — основа пластики актора.</div><div class="rule"><h4>🎤 Вокал і декламація</h4>Особлива співуча манера мови.</div><div class="rule"><h4>🍵 Чайна церемонія</h4>Вчить зосередженості, неквапності, точності кожного руху.</div><div class="rule"><h4>💐 Ікебана</h4>Мистецтво складання квітів — відчуття гармонії й краси.</div><div class="rule"><h4>🖌️ Каліграфія</h4>Тренує точність руки й внутрішній спокій.</div><div class="rule"><h4>👪 Династії</h4>Мистецтво передається в родинах акторів (наприклад, династія Ічікава Дандзюро); актори отримують сценічні імена.</div></div>
+<div class="note"><b>Оннагата</b> — актори, що грають жінок, роками вивчають жіночу ходу, жести, манеру говорити.</div>`,
+[{type:'flip',title:'Чого навчається актор Кабукі',cards:[['Танець','Основа пластики'],['Вокал','Співуча манера мови'],['Чайна церемонія','Зосередженість і точність рухів'],['Ікебана','Відчуття гармонії й краси'],['Каліграфія','Точність руки й спокій'],['Династія','Мистецтво передається в родині']]},
+{type:'match',title:'Мистецтво — що розвиває',pairs:[['Чайна церемонія','Неквапність і точність'],['Ікебана','Відчуття гармонії'],['Каліграфія','Точність руки'],['Танець','Пластика тіла']]},
+{type:'cross',title:'Кросворд «Школа актора Кабукі»',words:[['ІКЕБАНА','Мистецтво складання квітів'],['КАЛІГРАФІЯ','Мистецтво красивого письма'],['ЧАЙ','Напій особливої церемонії'],['ТАНЕЦЬ','Основа пластики актора'],['ВОКАЛ','Мистецтво співу'],['ОННАГАТА','Актор у жіночих ролях'],['ДИНАСТІЯ','Родина акторів']]}]);
+MORE[34]=[['З якого віку починають навчання актори Кабукі?',['З дитинства','Після 40 років','Не навчаються'],'Навчання триває все життя.'],['Що таке ікебана?',['Мистецтво складання квітів','Танець','Грим'],'Розвиває відчуття гармонії.'],['Чого вчить чайна церемонія?',['Зосередженості й точності рухів','Швидкості','Гучності голосу'],'Кожен рух важливий.'],['Навіщо акторові каліграфія?',['Тренує точність руки й спокій','Щоб писати афіші','Щоб вести бухгалтерію'],'Мистецтво красивого письма.'],['Як передається мистецтво Кабукі?',['У родинах-династіях','Через інтернет','Лише за книжками'],'Наприклад, Ічікава Дандзюро.'],['Хто такі оннагата?',['Актори в жіночих ролях','Музиканти','Глядачі'],'Роками вивчають жіночу пластику.'],['Що є основою пластики актора?',['Танець','Каліграфія','Ікебана'],'Традиційний японський танець.'],['Що отримують актори-спадкоємці?',['Сценічні імена','Нові прізвища для паспорта','Нагороди ЮНЕСКО'],'Імена передаються поколіннями.']];
+GOALS[34]=['пояснювати, чого навчаються актори Кабукі','пояснювати зв’язок чайної церемонії, ікебани й каліграфії з театром','розповідати про акторські династії'];
+LWORDS[34]=[['ІКЕБАНА','Мистецтво складання квітів'],['КАЛІГРАФІЯ','Мистецтво красивого письма'],['ЦЕРЕМОНІЯ','Чайна … вчить точності'],['ДИНАСТІЯ','Родина акторів'],['ВОКАЛ','Мистецтво співу'],['ОННАГАТА','Актор у жіночих ролях'],['ТАНЕЦЬ','Основа пластики']];
+
+L(35,'Підсумок ІІ семестру',
+`<div class="def">У ІІ семестрі ми простежили, як театр змінювався від <b>класицизму</b> через <b>сентименталізм</b> і <b>романтизм</b>, дізналися про <b>театр і суспільство</b> та відкрили японський <b>Кабукі</b>. Кожна епоха по-своєму відповідала на питання: <b>навіщо людям театр?</b></div>
+<table class="tbl"><tr><th>Напрям / тема</th><th>Головне</th></tr>
+<tr><td>Класицизм</td><td>Правила, три єдності, обов’язок понад почуття; Мольєр і комедія-балет</td></tr>
+<tr><td>Сентименталізм</td><td>Почуття, простий доброчесний герой, сльозлива комедія, співпереживання</td></tr>
+<tr><td>Романтизм</td><td>Пристрасть, бунт, амплуа, видовищна сценографія, газове світло</td></tr>
+<tr><td>Театр і суспільство</td><td>Від театру просто неба до сцени-коробки; ставлення до акторів; обмеження; нові професії</td></tr>
+<tr><td>Кабукі</td><td>Ка-бу-кі (спів, танець, майстерність), ханаміті, кумадорі, «винагороджуйте доброчесних», виховання актора</td></tr></table>`,
+[{type:'sort',title:'Який напрям?',buckets:['Класицизм','Сентименталізм','Романтизм'],items:[['Три єдності',0],['Сльозлива комедія',1],['Бунтівний герой',2],['Мольєр',0],['Простий доброчесний герой',1],['Гюго і «Ернані»',2],['Обов’язок понад почуття',0],['Співпереживання до сліз',1],['Газове освітлення і мальовничі задники',2]]},
+{type:'match',title:'Термін — значення',pairs:[['Амплуа','Тип ролей актора'],['Ханаміті','«Квітковий шлях» у Кабукі'],['Режисер','Створює виставу як ціле'],['Сцена-коробка','Сцена за порталом'],['Комедія-балет','Жанр Мольєра'],['Катарсис','Очищення через співпереживання']]},
+{type:'cross',title:'Кросворд року',words:[['МОЛЬЄР','Засновник класичної комедії'],['КАБУКІ','Японський театр співу й танцю'],['АМПЛУА','Тип ролей актора'],['РЕЖИСЕР','Створює виставу як ціле'],['РОМАНТИЗМ','Напрям пристрасті й свободи'],['ОКУНІ','Засновниця Кабукі'],['СЦЕНОГРАФІЯ','Мистецтво оформлення вистави']]}]);
+MORE[35]=[['Що вимагав класицизм?',['Дотримання правила трьох єдностей','Свободи від правил','Імпровізації'],'Місце, час, дія.'],['Хто герой сентименталізму?',['Проста доброчесна людина','Бог','Лиходій'],'Почуття понад розум.'],['Що характерно для романтизму?',['Пристрасть і бунт особистості','Суворі правила','Відсутність почуттів'],'Свобода творчості.'],['Що таке амплуа?',['Тип ролей актора','Різновид декорації','Квиток'],'Герой, інженю, резонер…'],['Що означає «бу» в слові Кабукі?',['Танець','Спів','Майстерність'],'Ка — спів, бу — танець, кі — майстерність.'],['Хто створює виставу як ціле?',['Режисер','Суфлер','Бутафор'],'Професія XIX ст.'],['Що таке сцена-коробка?',['Сцена за рамкою-порталом','Ящик для реквізиту','Театр просто неба'],'Театро Фарнезе, 1618 р.'],['Який принцип вистав Кабукі?',['Винагороджуйте доброчесних і карайте злих','Сміх крізь сльози','Три єдності'],'«Канзен тьоаку».']];
+GOALS[35]=['узагальнювати знання про театр класицизму, сентименталізму й романтизму','порівнювати європейський театр і Кабукі','застосовувати театральні терміни'];
+LWORDS[35]=[['МОЛЬЄР','Засновник класичної комедії'],['КАБУКІ','Японський театр'],['АМПЛУА','Тип ролей'],['РЕЖИСЕР','Автор задуму вистави'],['РОМАНТИЗМ','Напрям пристрасті'],['КАТАРСИС','Очищення через співпереживання'],['ПОРТАЛ','Рамка сцени']];
+
+</script>
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem('yt_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('yt_'+k,JSON.stringify(v))}catch(e){}}};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const strip=h=>String(h).replace(/<[^>]+>/g,'');
+const NUMS=Object.keys(LS).map(Number).sort((a,b)=>a-b);
+const modOf=n=>MODULES.find(m=>n>=m.range[0]&&n<=m.range[1]);
+let uid=0;const nid=()=>'x'+(++uid);
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),2600)}
+
+/* ---------- sidebar ---------- */
+function sideNav(q){q=(q||'').toLowerCase();const cur=curN();
+ $('#nav').innerHTML=MODULES.map(m=>{const ls=NUMS.filter(n=>n>=m.range[0]&&n<=m.range[1]&&(!q||LS[n].title.toLowerCase().includes(q)||String(n)==q));
+  if(!ls.length)return'';return `<div class="mod"><h4><i style="background:${m.color}"></i>${m.n}. ${esc(m.title)}</h4>${ls.map(n=>`<a href="#l/${n}" class="${n==cur?'on':''}"><span>${n}</span>${esc(LS[n].title)}</a>`).join('')}</div>`}).join('')}
+function curN(){const m=location.hash.match(/#l\/(\d+)/);return m?+m[1]:0}
+
+/* ---------- activities ---------- */
+const ACT={
+flip(a){return `<div class="grid2">${a.cards.map(c=>`<div class="flip" onclick="this.classList.toggle('f')"><div class="in"><div class="a">${c[0]}</div><div class="b">${c[1]}</div></div></div>`).join('')}</div>`},
+quiz(a){return a.qs.map(q=>quizQ(q.q,q.o,q.a,q.e)).join('')},
+sort(a){const id=nid();const items=shuffle(a.items.map((x,i)=>[x[0],x[1],i]));
+ return `<div id="${id}"><p><small>Натисніть на картку, потім — на потрібну колонку.</small></p><div class="chips pool">${items.map(x=>`<button class="chip" data-b="${x[1]}" onclick="sortPick(this)">${x[0]}</button>`).join('')}</div>
+ <div class="buckets">${a.buckets.map((b,i)=>`<div class="bucket" data-i="${i}" onclick="sortDrop(this)"><h5>${b}</h5><div class="chips"></div></div>`).join('')}</div>
+ <p><button class="btn" onclick="sortCheck('${id}')">Перевірити</button> <b class="res"></b></p></div>`},
+match(a){const id=nid();const L=a.pairs.map((p,i)=>[p[0],i]),R=shuffle(a.pairs.map((p,i)=>[p[1],i]));
+ return `<div id="${id}"><div class="mcols"><div>${L.map(x=>`<button class="mi l" data-i="${x[1]}" onclick="mPick(this)">${x[0]}</button>`).join('')}</div><div>${R.map(x=>`<button class="mi r" data-i="${x[1]}" onclick="mPick(this)">${x[0]}</button>`).join('')}</div></div></div>`},
+order(a){const id=nid();let it=shuffle(a.items.map((x,i)=>[x,i]));if(it.every((x,i)=>x[1]==i))it.reverse();
+ return `<div id="${id}"><ol class="ord" style="padding:0;list-style:none">${it.map(x=>`<li data-i="${x[1]}"><button onclick="ordMove(this,-1)">↑</button><button onclick="ordMove(this,1)">↓</button><span>${x[0]}</span></li>`).join('')}</ol><button class="btn" onclick="ordCheck('${id}')">Перевірити</button> <b class="res"></b></div>`},
+tf(a){return a.items.map(x=>`<div class="tf" data-a="${x[1]?1:0}"><p>${x[0]}</p><button onclick="tfAns(this,1)">Правда</button><button onclick="tfAns(this,0)">Неправда</button><small>${x[2]||''}</small></div>`).join('')},
+fill(a){const id=nid();return `<div id="${id}">${a.items.map(t=>'<p>'+t.replace(/\{([^}]+)\}/g,(m,g)=>{const o=g.split('|');return `<select class="fl" data-a="${esc(o[0])}"><option value="">…</option>${shuffle(o).map(x=>`<option>${esc(x)}</option>`).join('')}</select>`})+'</p>').join('')}<button class="btn" onclick="fillCheck('${id}')">Перевірити</button> <b class="res"></b></div>`},
+cross(a){return crossHTML(a.words)},
+memory(a){return memHTML(a.pairs)}
+};
+const ACTNAME={flip:'Картки',quiz:'Тест',sort:'Сортування',match:'Відповідність',order:'Послідовність',tf:'Правда чи неправда',fill:'Оберіть слово',cross:'Кросворд',memory:'Пам’ять'};
+function actBox(title,inner){return `<div class="act"><div class="bar"><i></i><i></i><i></i><span>${title}</span></div><div class="body">${inner}</div></div>`}
+function renderAct(a){return actBox(a.title||ACTNAME[a.type],ACT[a.type](a))}
+function quizQ(q,o,a,e){const opts=shuffle(o.map((x,i)=>[x,i==a]));return `<div class="q"><b>${q}</b>${opts.map(x=>`<button class="opt" data-ok="${x[1]?1:0}" onclick="qAns(this)">${x[0]}</button>`).join('')}<div class="expl">${e||''}</div></div>`}
+function qAns(b){const q=b.closest('.q');if(q.classList.contains('ans'))return;q.classList.add('ans');$$('.opt',q).forEach(x=>{if(x.dataset.ok=='1')x.classList.add('ok')});if(b.dataset.ok!='1')b.classList.add('no');if(window.onQ)window.onQ(b.dataset.ok=='1')}
+let sortSel=null;function sortPick(b){$$('.chip.sel').forEach(x=>x.classList.remove('sel'));sortSel=b;b.classList.add('sel')}
+function sortDrop(d){if(!sortSel)return;$('.chips',d).appendChild(sortSel);sortSel.classList.remove('sel','ok','no');sortSel=null}
+function sortCheck(id){const r=$('#'+id);let ok=0,t=0;$$('.bucket',r).forEach(b=>$$('.chip',b).forEach(c=>{t++;const g=c.dataset.b==b.dataset.i;c.classList.toggle('ok',g);c.classList.toggle('no',!g);if(g)ok++}));const left=$$('.pool .chip',r).length;$('.res',r).textContent=`Правильно: ${ok} з ${t+left}`}
+function mPick(b){if(b.classList.contains('ok'))return;const box=b.closest('.mcols');const side=b.classList.contains('l')?'l':'r';$$('.mi.'+side+'.sel',box).forEach(x=>x.classList.remove('sel'));b.classList.add('sel');const l=$('.mi.l.sel',box),r=$('.mi.r.sel',box);if(l&&r){if(l.dataset.i==r.dataset.i){[l,r].forEach(x=>{x.classList.remove('sel');x.classList.add('ok')})}else{[l,r].forEach(x=>{x.classList.add('no');x.classList.remove('sel')});setTimeout(()=>[l,r].forEach(x=>x.classList.remove('no')),600)}}}
+function ordMove(b,d){const li=b.closest('li');const ul=li.parentNode;if(d<0&&li.previousElementSibling)ul.insertBefore(li,li.previousElementSibling);if(d>0&&li.nextElementSibling)ul.insertBefore(li.nextElementSibling,li);$$('li',ul).forEach(x=>x.classList.remove('ok','no'))}
+function ordCheck(id){const r=$('#'+id);let ok=0;$$('li',r).forEach((li,i)=>{const g=li.dataset.i==i;li.classList.toggle('ok',g);li.classList.toggle('no',!g);if(g)ok++});$('.res',r).textContent=ok==$$('li',r).length?'✅ Усе правильно!':`На своєму місці: ${ok}`}
+function tfAns(b,v){const t=b.closest('.tf');if(t.classList.contains('ans'))return;t.classList.add('ans');const g=t.dataset.a==v;t.classList.add(g?'ok':'no');b.style.background=g?'#e8f8ee':'#fdecec';if(window.onQ)window.onQ(g)}
+function fillCheck(id){const r=$('#'+id);let ok=0,t=0;$$('select',r).forEach(s=>{t++;const g=s.value==s.dataset.a;s.classList.toggle('ok',g);s.classList.toggle('no',!g);if(g)ok++});$('.res',r).textContent=`Правильно: ${ok} з ${t}`}
+
+/* ---------- crossword ---------- */
+function buildCross(words){const W=words.map(w=>[w[0].toUpperCase().replace(/[^A-ZА-ЯІЇЄҐ]/g,''),w[1]]).filter(w=>w[0].length>1);let best=null;
+ for(let t=0;t<40;t++){const ord=t==0?W.slice().sort((a,b)=>b[0].length-a[0].length):shuffle(W);const g={},pl=[];
+  const get=(r,c)=>g[r+','+c];
+  const can=(w,r,c,d)=>{const dr=d?1:0,dc=d?0:1;if(get(r-dr,c-dc)||get(r+dr*w.length,c+dc*w.length))return false;let cross=0;
+   for(let i=0;i<w.length;i++){const rr=r+dr*i,cc=c+dc*i,x=get(rr,cc);if(x){if(x!=w[i])return false;cross++}else{if(get(rr+dc,cc+dr)||get(rr-dc,cc-dr))return false}}return cross>0};
+  const put=(w,r,c,d,cl)=>{for(let i=0;i<w.length;i++)g[(r+(d?i:0))+','+(c+(d?0:i))]=w[i];pl.push({w,r,c,d,cl})};
+  put(ord[0][0],0,0,0,ord[0][1]);
+  for(const [w,cl] of ord.slice(1)){const opts=[];for(const p of pl)for(let i=0;i<w.length;i++)for(let j=0;j<p.w.length;j++)if(w[i]==p.w[j]){const d=1-p.d;const r=p.d?p.r+j:p.r-i,c=p.d?p.c-i:p.c+j;
+     const rr=d?p.r-i:p.r+j,cc=d?p.c+j:p.c-i;if(can(w,rr,cc,d))opts.push([rr,cc,d])}
+   if(opts.length){const o=opts[Math.floor(Math.random()*opts.length)];put(w,o[0],o[1],o[2],cl)}}
+  if(!best||pl.length>best.length)best=pl;if(pl.length==W.length)break}
+ return best}
+function crossHTML(words){const pl=buildCross(words);const id=nid();let r0=1e9,c0=1e9,r1=-1e9,c1=-1e9;pl.forEach(p=>{r0=Math.min(r0,p.r);c0=Math.min(c0,p.c);r1=Math.max(r1,p.r+(p.d?p.w.length-1:0));c1=Math.max(c1,p.c+(p.d?0:p.w.length-1))});
+ const cells={},nums={};let k=0;pl.slice().sort((a,b)=>a.r-b.r||a.c-b.c).forEach(p=>{const key=p.r+','+p.c;if(!nums[key])nums[key]=++k;p.num=nums[key]});
+ pl.forEach(p=>{for(let i=0;i<p.w.length;i++)cells[(p.r+(p.d?i:0))+','+(p.c+(p.d?0:i))]=p.w[i]});
+ let h=`<div id="${id}" style="overflow:auto"><table class="cw">`;for(let r=r0;r<=r1;r++){h+='<tr>';for(let c=c0;c<=c1;c++){const L=cells[r+','+c];h+=L?`<td class="c">${nums[r+','+c]?`<sup>${nums[r+','+c]}</sup>`:''}<input maxlength="1" data-a="${L}" oninput="cwNext(this)"></td>`:'<td></td>'}h+='</tr>'}h+='</table>';
+ const cl=d=>pl.filter(p=>p.d==d).sort((a,b)=>a.num-b.num).map(p=>`<li><b>${p.num}.</b> ${p.cl} <small>(${p.w.length})</small></li>`).join('');
+ h+=`<div class="clues"><div><b>По горизонталі →</b><ol>${cl(0)}</ol></div><div><b>По вертикалі ↓</b><ol>${cl(1)}</ol></div></div><p><button class="btn" onclick="cwCheck('${id}')">Перевірити</button> <button class="btn g" onclick="cwShow('${id}')">Показати відповіді</button> <b class="res"></b></p></div>`;return h}
+function cwNext(i){i.value=i.value.toUpperCase();const all=$$('input',i.closest('table'));const k=all.indexOf(i);if(i.value&&all[k+1])all[k+1].focus()}
+function cwCheck(id){const r=$('#'+id);let ok=0,t=0;$$('td.c',r).forEach(td=>{const i=$('input',td);t++;const g=i.value.toUpperCase()==i.dataset.a;td.classList.toggle('ok',g);td.classList.toggle('no',!g&&i.value!='');if(g)ok++});$('.res',r).textContent=ok==t?'🎉 Кросворд розгадано!':`Правильних літер: ${ok} з ${t}`}
+function cwShow(id){$$('#'+id+' input').forEach(i=>i.value=i.dataset.a)}
+
+/* ---------- memory ---------- */
+function memHTML(pairs){const id=nid();const cards=shuffle(pairs.flatMap((p,i)=>[[p[0],i,0],[p[1],i,1]]));
+ return `<div id="${id}"><div class="mem">${cards.map(c=>`<button data-i="${c[1]}" data-s="${c[2]}" data-t="${esc(c[0])}" onclick="memFlip(this,'${id}')">?</button>`).join('')}</div><p><b class="res"></b></p></div>`}
+function memFlip(b,id){if(b.classList.contains('op')||b.classList.contains('dn'))return;const box=$('#'+id);const open=$$('button.op',box);if(open.length>=2)return;b.classList.add('op');b.textContent=b.dataset.t;const o=$$('button.op',box);
+ if(o.length==2){if(o[0].dataset.i==o[1].dataset.i&&o[0].dataset.s!=o[1].dataset.s){o.forEach(x=>{x.classList.remove('op');x.classList.add('dn');if(x.dataset.s=='1')x.classList.add('alt')});if(!$$('button:not(.dn)',box).length)$('.res',box).textContent='🎉 Усі пари знайдено!'}else setTimeout(()=>o.forEach(x=>{x.classList.remove('op');x.textContent='?'}),900)}}
+
+/* ---------- lesson helpers ---------- */
+function moreQs(n){return (MORE[n]||[]).map(m=>({q:m[0],o:m[1],a:0,e:m[2]}))}
+function allQs(n){const L=LS[n];let q=moreQs(n);L.acts.filter(a=>a.type=='quiz').forEach(a=>a.qs.forEach(x=>q.push(x)));return q}
+function ruleHTML(n){if(SUMRULE[n])return SUMRULE[n];const m=LS[n].theory.match(/<div class="def">([\s\S]*?)<\/div>/);return m?m[1]:''}
+function statements(n,k){const qs=shuffle(moreQs(n)).slice(0,k);return qs.map((q,i)=>{const t=i%2==0;const ans=t?q.o[q.a]:shuffle(q.o.filter((x,j)=>j!=q.a))[0];return [`${strip(q.q).replace(/\?$/,'')} — ${strip(ans)}.`,t,`Правильно: ${strip(q.o[q.a])}. ${q.e||''}`]})}
+
+/* ---------- stages ---------- */
+const STAGES=[['Карта настрою',2],['Розминка',3],['Тема й мета',1],['Нові знання',8],['Практика',10],['Підсумок',3],['Рефлексія',2],['Настрій після вивчення теми',1]];
+const WEATHER=[['☀️','Ясно!'],['🌤️','Майже ясно'],['☁️','Хмаринки'],['🌧️','Дощик'],['⛈️','Гроза']];
+function moodHTML(n,ph){const v=store.get(`mood_${n}_${ph}`,[0,0,0,0,0]);let h=`<div class="weather">${WEATHER.map((w,i)=>`<div class="wc" onclick="vote(${n},'${ph}',${i})"><div class="e">${w[0]}</div><b>${w[1]}</b><div class="n">${v[i]}</div></div>`).join('')}</div>`;
+ h+=`<p><button class="btn g" onclick="store.set('mood_${n}_${ph}',[0,0,0,0,0]);showLesson()">Скинути голоси</button></p>`;
+ if(ph=='after'){const b=store.get(`mood_${n}_before`,[0,0,0,0,0]);const mx=Math.max(1,...b,...v);h+=`<div class="card cmp"><h3>Порівняння: на початку уроку ↔ наприкінці</h3>${WEATHER.map((w,i)=>`<div class="row"><span>${w[0]} ${w[1]}</span><div><div class="bar2" style="width:${b[i]/mx*260+2}px"></div><div class="bar2 a" style="width:${v[i]/mx*260+2}px;margin-top:3px"></div></div><small>${b[i]} → ${v[i]}</small></div>`).join('')}<p><small>Синя смужка — на початку, жовта — наприкінці.</small></p></div>`}
+ return h}
+function vote(n,ph,i){const k=`mood_${n}_${ph}`;const v=store.get(k,[0,0,0,0,0]);v[i]++;store.set(k,v);showLesson()}
+function warmHTML(n){const i=NUMS.indexOf(n);if(i<=0){const w=store.get('cloud_'+n,[]);return `<div class="card"><h3>Хмара асоціацій: «Театр»</h3><p>Напишіть одне слово, яке спадає на думку, коли ви чуєте слово «театр».</p><input class="inp" id="cw_in" placeholder="Ваше слово…" onkeydown="if(event.key=='Enter')addCloud(${n})"> <button class="btn" onclick="addCloud(${n})">Додати</button><div class="chips" style="margin-top:12px">${w.map(x=>`<span class="chip" style="font-size:${14+Math.min(10,x[1]*3)}px">${esc(x[0])}</span>`).join('')}</div></div>`}
+ const p=NUMS[i-1];const qs=shuffle(allQs(p)).slice(0,3);return `<div class="card"><p>Згадайте попередній урок: <b>${esc(LS[p].title)}</b></p>${qs.map(q=>quizQ(q.q,q.o,q.a,q.e)).join('')}</div>`}
+function addCloud(n){const v=$('#cw_in').value.trim();if(!v)return;const w=store.get('cloud_'+n,[]);const f=w.find(x=>x[0].toLowerCase()==v.toLowerCase());if(f)f[1]++;else w.push([v,1]);store.set('cloud_'+n,w);showLesson()}
+function topicHTML(n){return `<div class="topic"><small class="mont" style="color:var(--y);font-weight:800">ТЕМА УРОКУ</small><h2>${esc(LS[n].title)}</h2><b>Після уроку ви зможете:</b><ul>${(GOALS[n]||[]).map(g=>`<li>${g}</li>`).join('')}</ul><div class="plan">${STAGES.map(s=>`<div><b>${s[1]} хв</b>${s[0]}</div>`).join('')}</div></div>`}
+function theoryHTML(n){return `<div class="theory">${LS[n].theory}</div>`}
+function practiceHTML(n){return LS[n].acts.map(renderAct).join('')+gamesTiles(n)}
+function summaryHTML(n){let r=ruleHTML(n).replace(/<b>(.*?)<\/b>/g,(m,g)=>`<button class="qbtn" onclick="this.textContent=this.dataset.t;this.classList.add('r')" data-t="${esc(strip(g))}">?</button>`);
+ return actBox('Відновіть правило',`<p><small>Пригадайте слова, сховані за «?», і натисніть, щоб перевірити.</small></p><div class="def">${r}</div>`)+actBox('Вірю — не вірю',ACT.tf({items:statements(n,4)}))}
+const REFL=['sent','light','321','steps','word'];
+function reflHTML(n){const t=REFL[(NUMS.indexOf(n))%5];
+ if(t=='sent')return actBox('Незакінчені речення',`<div class="refl">${['Сьогодні я дізнався(-лася)…','Найцікавішим для мене було…','Мене здивувало…','Я хочу дізнатися більше про…'].map(s=>`<p><b>${s}</b><input placeholder="Продовжте речення…"></p>`).join('')}</div>`);
+ if(t=='light'){const v=store.get('light_'+n,[0,0,0]);return actBox('Світлофор',`<p>Оберіть колір, що відповідає вашому розумінню теми.</p><div class="light">${[['#16a34a','🟢 Усе зрозуміло'],['#e0a800','🟡 Є запитання'],['#dc2626','🔴 Потрібна допомога']].map((c,i)=>`<button style="background:${c[0]}" onclick="cnt('light_${n}',${i},3)">${c[1]}<br><span style="font-size:26px">${v[i]}</span></button>`).join('')}</div>`)}
+ if(t=='321')return actBox('3-2-1',`<div class="refl"><p><b>3 факти</b>, які ви запам’ятали:</p><textarea rows="3"></textarea><p><b>2 речі</b>, які були цікавими:</p><textarea rows="2"></textarea><p><b>1 запитання</b>, яке залишилося:</p><input></div>`);
+ if(t=='steps'){const v=store.get('steps_'+n,[0,0,0,0]);return actBox('Сходинки успіху',`<p>На якій сходинці ви зараз?</p><div class="steps">${['Мені ще складно','Я розумію з підказкою','Я розумію сам(а)','Я можу пояснити іншим'].map((s,i)=>`<button onclick="cnt('steps_${n}',${i},4)" style="margin-left:${i*30}px">${i+1}. ${s}<b>${v[i]}</b></button>`).join('')}</div>`)}
+ const w=store.get('word_'+n,[]);return actBox('Хмара «одне слово»',`<p>Опишіть урок одним словом.</p><input class="inp" id="ow_in" onkeydown="if(event.key=='Enter')addWord(${n})"> <button class="btn" onclick="addWord(${n})">Додати</button><div class="chips" style="margin-top:10px">${w.map(x=>`<span class="chip" style="font-size:${14+Math.min(12,x[1]*3)}px">${esc(x[0])}</span>`).join('')}</div>`)}
+function cnt(k,i,len){const v=store.get(k,Array(len).fill(0));v[i]++;store.set(k,v);showLesson()}
+function addWord(n){const v=$('#ow_in').value.trim();if(!v)return;const w=store.get('word_'+n,[]);const f=w.find(x=>x[0].toLowerCase()==v.toLowerCase());if(f)f[1]++;else w.push([v,1]);store.set('word_'+n,w);showLesson()}
+
+/* ---------- lesson games ---------- */
+const LGAMES=[['cross','🧩','Кросворд'],['p15','🔢','П’ятнашки'],['myth','🤔','Правда чи міф'],['blitz','⚡','Бліц 60 с'],['quest','🗝️','Квест'],['anag','🔤','Анаграми']];
+function gamesTiles(n){const hasCross=LS[n].acts.some(a=>a.type=='cross');return actBox('Ігри уроку',`<div class="tiles">${LGAMES.filter(g=>!(g[0]=='cross'&&hasCross)).map(g=>`<button class="tile" onclick="openGame(this,'${g[0]}',${n})"><span class="e">${g[1]}</span>${g[2]}</button>`).join('')}</div><div class="gamebox" id="gb_${n}"></div>`)}
+function openGame(t,g,n){$$('.tile',t.parentNode).forEach(x=>x.classList.remove('on'));t.classList.add('on');stopBlitz();const box=$('#gb_'+n);
+ if(g=='cross')box.innerHTML=crossHTML(LWORDS[n]);
+ if(g=='p15')box.innerHTML=p15HTML(n);
+ if(g=='myth')box.innerHTML=ACT.tf({items:statements(n,8)});
+ if(g=='blitz')blitz(box,allQs(n));
+ if(g=='quest')quest(box,n);
+ if(g=='anag')box.innerHTML=anagHTML(n)}
+function p15HTML(n){const words=strip(ruleHTML(n)).trim().split(/\s+/);const parts=[];const per=Math.ceil(words.length/8);for(let i=0;i<8;i++){const s=words.slice(Math.round(i*words.length/8),Math.round((i+1)*words.length/8)).join(' ');parts.push(s||'…')}
+ let st=[0,1,2,3,4,5,6,7,8];for(let k=0;k<120;k++){const e=st.indexOf(8);const nb=[e-3,e+3,e%3?e-1:-1,e%3<2?e+1:-1].filter(x=>x>=0&&x<9);const m=nb[Math.floor(Math.random()*nb.length)];[st[e],st[m]]=[st[m],st[e]]}
+ if(st.every((x,i)=>x==i)){[st[7],st[8]]=[st[8],st[7]];[st[6],st[7]]=[st[7],st[6]]}
+ window.P15={st,parts,n};return `<p><small>Зберіть правило в правильному порядку: натискайте на плитку поруч із порожньою клітинкою. Номер у кутку — підказка.</small></p><div class="p15" id="p15">${p15Cells()}</div><p class="res" id="p15r"></p>`}
+function p15Cells(){const {st,parts}=window.P15;return st.map((x,i)=>x==8?`<button class="e"></button>`:`<button onclick="p15Move(${i})"><sup>${x+1}</sup>${esc(parts[x])}</button>`).join('')}
+function p15Move(i){const {st}=window.P15;const e=st.indexOf(8);const adj=(Math.abs(e-i)==3)||(Math.abs(e-i)==1&&Math.floor(e/3)==Math.floor(i/3));if(!adj)return;[st[e],st[i]]=[st[i],st[e]];$('#p15').innerHTML=p15Cells();if(st.every((x,k)=>x==k))$('#p15r').innerHTML='🎉 Правило зібрано: <b>'+strip(ruleHTML(window.P15.n))+'</b>'}
+let BT=null;function stopBlitz(){if(BT){clearInterval(BT);BT=null}window.onQ=null}
+function blitz(box,qs){let t=60,score=0,k=0;const Q=shuffle(qs);const next=()=>{const q=Q[k++%Q.length];$('#bq').innerHTML=quizQ(q.q,q.o,q.a,q.e)};
+ box.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><span class="timer" id="bt">60</span><b>Правильних: <span id="bs">0</span></b></div><div id="bq"></div></div>`;
+ window.onQ=ok=>{if(ok){score++;$('#bs').textContent=score}setTimeout(()=>{if(BT)next()},500)};next();
+ BT=setInterval(()=>{t--;const e=$('#bt');if(!e){stopBlitz();return}e.textContent=t;if(t<=0){stopBlitz();box.innerHTML=`<div class="card"><div class="big">${score}</div><p style="text-align:center">правильних відповідей за 60 секунд!</p></div>`}},1000)}
+function quest(box,n){const W=(LWORDS[n]||[]).map(w=>w[0]).filter(w=>w.length>=5&&w.length<=9).sort((a,b)=>b.length-a.length);const word=(W[0]||'ТЕАТР').toUpperCase();const clue=(LWORDS[n].find(w=>w[0].toUpperCase()==word)||['',''])[1];
+ const qs=shuffle(allQs(n)).slice(0,5);let st=0;const per=Math.ceil(word.length/5);
+ const draw=()=>{const shown=Math.min(word.length,st*per);box.innerHTML=`<div class="card"><h3>🗝️ Квест: станція ${Math.min(st+1,5)} з 5</h3><div class="letters">${[...word].map((c,i)=>`<span>${i<shown?c:'?'}</span>`).join('')}</div>${st<5?`<div id="qq">${quizQ(qs[st].q,qs[st].o,qs[st].a,qs[st].e)}</div>`:`<p style="text-align:center">🎉 Секретне слово: <b>${word}</b> — ${clue}</p>`}</div>`};
+ window.onQ=ok=>{if(ok){st++;setTimeout(draw,600)}else setTimeout(draw,1400)};draw()}
+function anagHTML(n){const ws=shuffle(LWORDS[n]||[]).slice(0,5);const id=nid();return `<div id="${id}">${ws.map(w=>{const W=w[0].toUpperCase();let s;do{s=shuffle([...W]).join('')}while(s==W&&W.length>2);return `<div class="card"><b class="mont" style="font-size:22px;letter-spacing:4px;color:var(--blue)">${s}</b><p><small>Підказка: ${w[1]}</small></p><input class="inp" data-a="${W}" placeholder="Ваша відповідь"> <button class="btn" onclick="const i=this.previousElementSibling;const g=i.value.trim().toUpperCase()==i.dataset.a;i.style.borderColor=g?'#16a34a':'#dc2626';this.nextElementSibling.textContent=g?'✅':'❌ '+i.dataset.a">Перевірити</button> <b></b></div>`}).join('')}</div>`}
+
+/* ---------- lesson page ---------- */
+let STAGE=0,MODE='stages';
+function showLesson(){const n=curN();if(!LS[n])return home();stopBlitz();const L=LS[n],m=modOf(n);const i=NUMS.indexOf(n);
+ let h=`<div class="lhead"><div class="crumb" style="color:${m.color}">Модуль ${m.n}. ${esc(m.title)} · Урок ${n}</div><h1>${esc(L.title)}</h1><div class="modes"><button class="${MODE=='stages'?'on':''}" onclick="MODE='stages';showLesson()">Урок за етапами</button><button class="${MODE=='all'?'on':''}" onclick="MODE='all';showLesson()">Теорія + вправи</button></div></div>`;
+ if(MODE=='all'){h+=`<span class="ribbon"><span>Нові знання</span></span>${theoryHTML(n)}<span class="ribbon"><span>Практика</span></span>${practiceHTML(n)}`}
+ else{h+=`<div class="tabs">${STAGES.map((s,k)=>`<button class="${k==STAGE?'on':''}" onclick="STAGE=${k};showLesson()">${s[0]}</button>`).join('')}</div><div class="mins">${STAGES[STAGE][1]} хв</div><span class="ribbon"><span>${STAGES[STAGE][0]}</span></span>`;
+  h+=[()=>moodHTML(n,'before'),()=>warmHTML(n),()=>topicHTML(n),()=>theoryHTML(n),()=>practiceHTML(n),()=>summaryHTML(n),()=>reflHTML(n),()=>moodHTML(n,'after')][STAGE]();
+  h+=`<div class="nav2"><button class="btn g" ${STAGE==0?'disabled':''} onclick="STAGE--;showLesson()">← Назад</button><button class="btn" ${STAGE==7?'disabled':''} onclick="STAGE++;showLesson()">Далі →</button></div>`}
+ h+=`<div class="nav2" style="border-top:1px solid var(--line);padding-top:14px">${i>0?`<a class="btn g" style="text-decoration:none" href="#l/${NUMS[i-1]}">← Урок ${NUMS[i-1]}</a>`:'<span></span>'}${i<NUMS.length-1?`<a class="btn y" style="text-decoration:none" href="#l/${NUMS[i+1]}">Урок ${NUMS[i+1]} →</a>`:''}</div>`;
+ $('#main').innerHTML=h;sideNav($('.search').value)}
+
+/* ---------- home & games ---------- */
+function home(){stopBlitz();$('#main').innerHTML=`<div class="hero"><h1>${COURSE.title}</h1><p>${COURSE.sub}</p></div><div class="mods">${MODULES.map(m=>`<div class="mcard" style="border-color:${m.color}" onclick="location.hash='#l/${m.range[0]}'"><b>${m.n}. ${esc(m.title)}</b><small>Уроки ${m.range[0]}–${m.range[1]}</small></div>`).join('')}</div>`;sideNav($('.search').value)}
+function gamesPage(){stopBlitz();$('#main').innerHTML=`<h1>🎲 Ігри курсу</h1>
+ ${actBox('Бліц по всьому курсу',`<button class="btn" onclick="blitz($('#gcb'),NUMS.flatMap(allQs))">Почати бліц (60 с)</button><div id="gcb"></div>`)}
+ ${actBox('Хто відповідає?',`<p>Кількість учнів у класі: <input class="inp" style="width:90px" id="who_n" type="number" value="${store.get('who',25)}"> <button class="btn y" onclick="who()">🎯 Обрати</button></p><div class="big" id="who_r">?</div>`)}
+ ${actBox('Кросворди та пам’ять по модулях',`<div class="tiles">${MODULES.map(m=>`<button class="tile" style="border-color:${m.color}" onclick="modGame(this,${m.n},'cross')"><span class="e">🧩</span>${m.n}. ${esc(m.title)}</button><button class="tile" style="border-color:${m.color}" onclick="modGame(this,${m.n},'mem')"><span class="e">🃏</span>Пам’ять: ${m.n}</button>`).join('')}</div><div id="mgb"></div>`)}`;sideNav('')}
+function who(){const n=+$('#who_n').value||25;store.set('who',n);let k=0;const it=setInterval(()=>{const e=$('#who_r');if(!e){clearInterval(it);return}e.textContent=1+Math.floor(Math.random()*n);if(++k>15)clearInterval(it)},70)}
+function modGame(t,mn,g){$$('#main .tile').forEach(x=>x.classList.remove('on'));t.classList.add('on');const m=MODULES.find(x=>x.n==mn);const ns=NUMS.filter(n=>n>=m.range[0]&&n<=m.range[1]);
+ const words=[];const seen={};ns.forEach(n=>(LWORDS[n]||[]).forEach(w=>{if(!seen[w[0]]){seen[w[0]]=1;words.push(w)}}));
+ if(g=='cross')$('#mgb').innerHTML=crossHTML(shuffle(words).slice(0,10));
+ else{const pairs=shuffle(words).slice(0,6).map(w=>[w[0],w[1]]);$('#mgb').innerHTML=memHTML(pairs)}}
+
+/* ---------- scoreboard & presentation ---------- */
+function toggleScore(){const b=$('#scoreBox');if(b.innerHTML){b.innerHTML='';store.set('scoreOn',0);return}store.set('scoreOn',1);drawScore()}
+function drawScore(){const s=store.get('score',{k:2,t:[['Команда 1',0],['Команда 2',0],['Команда 3',0],['Команда 4',0]]});$('#scoreBox').innerHTML=`<div class="score"><div style="display:flex;justify-content:space-between;align-items:center"><b class="mont">🏆 Табло</b><span>${[2,3,4].map(k=>`<button class="btn ${s.k==k?'':'g'}" style="padding:2px 8px" onclick="scSet('k',${k})">${k}</button>`).join(' ')} <button class="btn g" style="padding:2px 8px" onclick="toggleScore()">✕</button></span></div>${s.t.slice(0,s.k).map((t,i)=>`<div class="tm"><input value="${esc(t[0])}" onchange="scName(${i},this.value)"><button onclick="scAdd(${i},-1)">−</button><b>${t[1]}</b><button onclick="scAdd(${i},1)">+</button></div>`).join('')}<button class="btn g" style="padding:2px 8px;font-size:13px" onclick="scReset()">Обнулити</button></div>`;window.SC=s}
+function scSet(k,v){SC[k]=v;store.set('score',SC);drawScore()}
+function scAdd(i,d){SC.t[i][1]+=d;store.set('score',SC);drawScore()}
+function scName(i,v){SC.t[i][0]=v;store.set('score',SC)}
+function scReset(){SC.t.forEach(t=>t[1]=0);store.set('score',SC);drawScore()}
+function present(){const on=!document.documentElement.classList.contains('present');document.documentElement.classList.toggle('present',on);document.body.classList.toggle('present',on);
+ if(on){try{const p=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(p&&p.catch)p.catch(()=>toast('Натисніть F11 для повного екрана'))}catch(e){toast('Натисніть F11 для повного екрана')}}else{try{if(document.fullscreenElement)document.exitFullscreen()}catch(e){}}}
+document.addEventListener('keydown',e=>{if(e.target.matches('input,textarea,select'))return;
+ if(e.key=='Escape'&&document.documentElement.classList.contains('present')){document.documentElement.classList.remove('present');document.body.classList.remove('present')}
+ if(curN()&&MODE=='stages'){if(e.key=='ArrowRight'&&STAGE<7){STAGE++;showLesson()}if(e.key=='ArrowLeft'&&STAGE>0){STAGE--;showLesson()}}});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement){document.documentElement.classList.remove('present');document.body.classList.remove('present')}});
+function route(){const h=location.hash;$('.side').classList.remove('open');if(h=='#games')gamesPage();else if(curN()){if(window._last!=curN()){STAGE=0;window._last=curN()}showLesson();scrollTo(0,0)}else home()}
+window.addEventListener('hashchange',route);route();if(store.get('scoreOn',0))drawScore();
+
+</script>
+</body>
+</html>
